@@ -4,10 +4,10 @@ import os
 import re
 import zipfile
 
+import git
 import requests
 from dotenv import load_dotenv
-from git import Repo
-from github import Auth, Github
+from github import Auth, Github, Repository
 from numpy import linspace
 
 load_dotenv()
@@ -15,8 +15,8 @@ load_dotenv()
 # --- Configuration ---
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 REPO_NAME = "home-assistant/core"
-MAX_RUNS = 50  # Number of recent successful runs to check
-LOCAL_REPO = Repo("./core")
+MAX_RUNS = 20  # Number of recent successful runs to check
+LOCAL_REPO = git.Repo("../core")
 
 
 def get_failed_tests_from_logs(zip_content):
@@ -48,55 +48,64 @@ def get_test_metadata(
     :param head_commit: The commit hash representing the current moment in time. Defaults to HEAD.
     :param commit_sample_size: How many commits to return in the sample.
     """
+    try:
+        # Find the commit that introduced the test function definition
+        file_path, test_name = test_id.split("::")
+        log_output = LOCAL_REPO.git.log(
+            f"-L:{test_name}:{file_path}", "--reverse", "--format=%H", "--no-patch"
+        )
+        introduction_commit_sha = log_output.strip().split("\n")[0]
+        commits_since_introduction = list(
+            LOCAL_REPO.iter_commits(f"{introduction_commit_sha}..{head_commit}")
+        )
+        introduction_date = LOCAL_REPO.commit(
+            introduction_commit_sha
+        ).committed_datetime.isoformat()
 
-    # Find the commit that introduced the test function definition
-    file_path, test_name = test_id.split("::")
-
-    log_output = LOCAL_REPO.git.log(
-        f"-L:{test_name}:{file_path}", "--reverse", "--format=%H", "--no-patch"
-    )
-    introduction_commit_sha = log_output.strip().split("\n")[0]
-    commits_since_introduction = list(
-        LOCAL_REPO.iter_commits(f"{introduction_commit_sha}..{head_commit}")
-    )
-    introduction_date = LOCAL_REPO.commit(
-        introduction_commit_sha
-    ).committed_datetime.isoformat()
-
-    return {
-        "introduced_in": introduction_commit_sha,
-        "introduction_date": introduction_date,
-        "commits_since_introduction": len(commits_since_introduction),
-        "commit_sample": [
-            commits_since_introduction[round(i)].hexsha
-            for i in linspace(
-                0, len(commits_since_introduction) - 1, commit_sample_size
-            )
-        ],
-    }
+        return {
+            "introduced_in": introduction_commit_sha,
+            "introduction_date": introduction_date,
+            "commits_since_introduction": len(commits_since_introduction),
+            "commit_sample": [
+                commits_since_introduction[round(i)].hexsha
+                for i in linspace(
+                    0, len(commits_since_introduction) - 1, commit_sample_size
+                )
+            ],
+        }
+    except git.exc.GitCommandError:
+        return None
 
 
-def run_datum(remote, run):
-    log_url = f"https://api.github.com/repos/{REPO_NAME}/actions/runs/{run.id}/attempts/1/logs"
+def get_run_metadata(remote: Repository, run: dict) -> dict:
+    """
+    Finds the commit hashes associated with the run, and identifies flaky test candidates.
+
+    :param remote: The GitHub Repository.
+    :param run: The workflow run.
+    """
+    log_url = f"https://api.github.com/repos/{REPO_NAME}/actions/runs/{run['id']}/attempts/1/logs"
     headers = {"Authorization": f"token {GITHUB_TOKEN}"}
     response = requests.get(log_url, headers=headers, timeout=30)
-    pulls = remote.get_commit(run.head_sha).get_pulls()
+    pulls = remote.get_commit(run["head_sha"]).get_pulls()
 
     if response.status_code == 200 and pulls.totalCount > 0:
         pr = pulls[0]
-        flaky_tests = get_failed_tests_from_logs(response.content)
-        if flaky_tests:
+        flaky_test_candidates = []
+        for test_id in get_failed_tests_from_logs(response.content):
+            test_metadata = get_test_metadata(test_id)
+            if test_metadata:
+                flaky_test_candidates.append({"test_id": test_id} | test_metadata)
+
+        if flaky_test_candidates:
             return {
-                "run_id": run.id,
-                "run_attempt": run.run_attempt,
-                "flaky_test_candidates": [
-                    {"test_id": test_id} | get_test_metadata(test_id)
-                    for test_id in flaky_tests
-                ],
+                "run_id": run["id"],
+                "run_attempt": run["run_attempt"],
+                "flaky_test_candidates": flaky_test_candidates,
                 "pr_number": pr.number,
                 "pr_title": pr.title,
                 # The Merge Commit created by GitHub for the CI run
-                "merge_commit_sha": run.head_sha,
+                "merge_commit_sha": run["head_sha"],
                 # The Source (Feature Branch) commit
                 "source_sha": pr.head.sha,
                 # The Target (Base Branch, e.g., dev) commit
@@ -106,48 +115,42 @@ def run_datum(remote, run):
 
 
 def main():
-    run_ids = [
-        # 21449219805,
-        # 21446895624,
-        # 21431943649,
-        # 21431522901,
-        # 21431137197,
-        # 21431095563,
-        # 21430678742,
-        # 21430633954,
-        # 21429397552,
-        # 21420612878,
-        # 21417739495,
-        # 21388188984,
-        # 21384161812,
-        # 21343142119,
-        # 21338669930,
-        # 21325525765,
-        # 21312963300,
-    ]
-    g = Github(auth=Auth.Token(GITHUB_TOKEN))
-    remote = g.get_repo(REPO_NAME)
-
-    # We filter by 'pull_request' event specifically now
-    def runs():
-        for run in map(remote.get_workflow_run, run_ids):
-            yield run
-        for run in remote.get_workflow_runs(event="pull_request", status="success"):
-            yield run
-
+    remote = Github(auth=Auth.Token(GITHUB_TOKEN)).get_repo(REPO_NAME)
     found_count = 0
     data = []
-    for run in runs():
-        if found_count >= MAX_RUNS:
-            break
-        if run.run_attempt > 1:
-            found_count += 1
-            datum = run_datum(remote, run)
-            if datum is not None:
-                data.append(datum)
 
-    with open("home_assistant_flakes2.json", "w") as f:
-        json.dump(data, f, indent=2)
+    url = f"https://api.github.com/repos/{REPO_NAME}/actions/runs"
+    params = {
+        "state": "closed",
+        "base": "master",  # or 'main' depending on the branch
+        "sort": "updated",
+        "direction": "desc",
+        "per_page": 100,
+    }
+    headers = {"Authorization": f"token {GITHUB_TOKEN}"} if GITHUB_TOKEN else {}
+
+    # Pagination loop for PRs (GitHub API returns 100 max per page)
+    while url:
+        response = requests.get(url, params=params, headers=headers, timeout=30)
+        response.raise_for_status()
+        runs = response.json()
+        if not runs:
+            break
+        runs = runs["workflow_runs"]
+        for run in runs:
+            if found_count >= MAX_RUNS:
+                break
+            if run["run_attempt"] > 1:
+                datum = get_run_metadata(remote, run)
+                if datum is not None:
+                    data.append(datum)
+                    found_count += 1
+        with open("home_assistant_flakes2.json", "w") as f:
+            json.dump(data, f, indent=2)
+        if "next" in response.links and url:
+            url = response.links["next"]["url"]
+        else:
+            break
 
 
 if __name__ == "__main__":
