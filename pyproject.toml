@@ -1,0 +1,15 @@
+[project]
+name = "flakefighters-experiment"
+description = "Evaluation replication package for flakefighters."
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "dotenv>=0.9.9",
+    "gitpython>=3.1.46",
+    "numpy>=2.2.6",
+    "pygithub>=2.8.1",
+    "pytest>=9.0.2",
+    "pytest-flakefighters>=0.4.1",
+    "requests>=2.32.5",
+]
+dynamic = ["version"]

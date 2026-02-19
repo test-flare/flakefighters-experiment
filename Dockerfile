@@ -33,7 +33,7 @@ RUN pip install --no-cache-dir pytest pytest-flakefighters
 
 # Copy the entrypoint script
 COPY entrypoint.sh entrypoint.sh
-COPY reproduce_flakiness.py reproduce_flakiness.py
+COPY src/reproduce_flakiness.py reproduce_flakiness.py
 RUN chmod +x entrypoint.sh
 RUN mkdir outputs
 
