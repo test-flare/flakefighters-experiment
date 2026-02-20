@@ -1,7 +1,6 @@
 import io
 import json
 import os
-import re
 import zipfile
 
 import git
@@ -10,6 +9,9 @@ from dotenv import load_dotenv
 from github import Auth, Github, Repository
 from numpy import linspace
 from multiprocessing import Pool
+
+from reproduce_flakiness import parse_test_failures
+
 
 load_dotenv()
 
@@ -21,17 +23,6 @@ NAME = "CI"  # Action name
 MAX_RUNS = 20  # Number of recent successful runs to check
 LOCAL_REPO = git.Repo("./core")
 HEAD = "ebd1f1b00f931095039973b40fe60355575cc781"
-
-
-def parse_test_failures(content):
-    failed_tests = []
-    # Pytest failure pattern in logs: FAILED path/to/test.py::test_name
-    pytest_fail_regex = re.compile(r"(FAILED|ERROR|FLAKY)\s+([\w\/\.\d_]+::[\w\d_]+)")
-    matches = pytest_fail_regex.findall(content)
-    for m in matches:
-        if m not in failed_tests:
-            failed_tests.append(m[-1])
-    return failed_tests
 
 
 def get_failed_tests_from_logs(zip_content):

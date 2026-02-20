@@ -2,10 +2,10 @@ import argparse
 import json
 import os
 import subprocess
+import re
 
 from git import Repo
 
-from home_assistant_pr_scraper import parse_test_failures
 
 # --- Configuration ---
 REPO_PATH = "./core"  # Path where the repo will be cloned
@@ -13,7 +13,27 @@ REPO_URL = "https://github.com/home-assistant/core.git"
 ITERATIONS = 100
 
 
+def parse_test_failures(content):
+    failed_tests = []
+    # Pytest failure pattern in logs: FAILED path/to/test.py::test_name
+    pytest_fail_regex = re.compile(r"(FAILED|ERROR|FLAKY)\s+([\w\/\.\d_]+::[\w\d_]+)")
+    matches = pytest_fail_regex.findall(content)
+    for m in matches:
+        if m not in failed_tests:
+            failed_tests.append(m[-1])
+    return failed_tests
+
+
 def search_for_flakiness(test_path, db_url):
+    result = subprocess.run(
+        "./script/setup",
+        check=False,
+        shell=True,
+        cwd=REPO_PATH,
+        capture_output=True,
+    )
+    if result.returncode != 0:
+        return {"successes": None, "failures": None, "confirmed": None, "error": result.stderr}
     with open(os.path.join(REPO_PATH, "pyproject.toml"), "a") as f:
         f.write(
             """
@@ -84,8 +104,6 @@ def main():
     repo.git.checkout(args.target_sha)
     repo.remotes.origin.fetch(args.source_sha)
     repo.git.merge("FETCH_HEAD")
-
-    subprocess.run("./script/setup", check=True, cwd=REPO_PATH)
 
     flakiness["PR"] = search_for_flakiness(args.test_path, f"sqlite:///{args.output.replace('.json', '.db')}")
     repo.git.checkout("--", "pyproject.toml")
