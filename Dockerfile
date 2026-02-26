@@ -1,5 +1,5 @@
-# Using the 3.14 release candidate image
-FROM python:3.14.3-bookworm
+ARG PY_VERSION=3.14
+FROM python:${PY_VERSION}-bookworm
 
 # Install system dependencies required for Home Assistant core
 RUN apt-get update && apt-get install -y \

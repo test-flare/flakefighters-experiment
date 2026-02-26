@@ -3,6 +3,8 @@ import json
 import os
 import subprocess
 import re
+import sys
+import tomllib
 
 from glob import glob
 
@@ -14,7 +16,11 @@ REPO_PATH = "./core"  # Path where the repo will be cloned
 REPO_URL = "https://github.com/home-assistant/core.git"
 ITERATIONS = 2
 
-replacements = {r"mypy\-dev==\d+\.\d+\.\w+": "mypy-dev", r"aioasuswrt==1\.5\.1": "aioasuswrt==1.5.2"}
+replacements = {
+    r"mypy\-dev==\d+\.\d+\.\w+": "mypy-dev",
+    r"aioasuswrt==1\.5\.1": "aioasuswrt==1.5.2",
+    r"aiodns==3\..*": r"\g<0>\\npycares<5",
+}
 
 
 def parse_test_failures(content):
@@ -39,15 +45,15 @@ def search_for_flakiness(test_path, db_url):
         with open(fname, "w") as f:
             f.write("\n".join(packages))
 
-    result = subprocess.run(
+    setup_result = subprocess.run(
         "./script/setup",
         check=False,
         shell=True,
         cwd=REPO_PATH,
         capture_output=True,
     )
-    if result.returncode != 0:
-        return {"successes": None, "failures": None, "confirmed": None, "error": result.stderr.decode("utf-8")}
+    if setup_result.returncode != 0:
+        return {"successes": None, "failures": None, "confirmed": None, "error": setup_result.stderr.decode("utf-8")}
     with open(os.path.join(REPO_PATH, "pyproject.toml"), "a") as f:
         f.write(
             """
@@ -74,9 +80,9 @@ def search_for_flakiness(test_path, db_url):
         if successes and failures:
             confirmed = True
             break
-        print(f"pytest {test_to_run} --database-url={db_url}")
+        print(f"pytest {test_to_run} --database-url={db_url} --flakefighters")
         process = subprocess.run(
-            f"pytest {test_to_run} --database-url={db_url}",
+            f"pytest {test_to_run} --database-url={db_url} --flakefighters",
             shell=True,
             cwd=REPO_PATH,
             capture_output=True,
@@ -92,7 +98,7 @@ def search_for_flakiness(test_path, db_url):
         else:
             failures += 1
 
-    assert os.path.exists(db_url), f"No database at {db_url}"
+    assert setup_result or os.path.exists(db_url), f"No database at {db_url}"
     return {"successes": successes, "failures": failures, "confirmed": confirmed}
 
 
@@ -115,9 +121,10 @@ def main():
     parser.add_argument("-s", "--source-sha", help="Source commit sha.")
     parser.add_argument("-t", "--target-sha", help="Target commit sha.")
     parser.add_argument("-T", "--test-path", help="Name of the test to run.")
-    parser.add_argument("-S", "--sample-shas", nargs="+", help="List of historic commits to run the tests on.")
     parser.add_argument("-o", "--output", help="Output file path.")
     args = parser.parse_args()
+
+    os.makedirs(os.path.split(args.output)[0], exist_ok=True)
 
     db_url = f"sqlite:///{args.output.replace('.json', '.db')}"
 
@@ -125,16 +132,25 @@ def main():
     repo.git.reset("--hard")
     repo.git.fetch()
 
-    flakiness = {}
-    for sha in args.sample_shas:
-        flakiness[sha] = check_sha(repo, sha, args.test_path, db_url)
-    flakiness[args.target_sha] = check_sha(repo, args.target_sha, args.test_path, db_url, args.source_sha)
+    flakiness = check_sha(repo, args.target_sha, args.test_path, db_url, args.source_sha)
+
+    python_version = ""
+    if os.path.exists(f"{REPO_PATH}/.python_version"):
+        with open(f"{REPO_PATH}/.python_version") as f:
+            python_version = f.readline().strip()
+    else:
+        with open(f"{REPO_PATH}/pyproject.toml", "rb") as f:
+            data = tomllib.load(f)
+            python_version += "||" + data.get("project", {}).get("requires-python")
 
     with open(args.output, "w") as f:
         json.dump(
             {
                 "source_sha": args.source_sha,
                 "target_sha": args.target_sha,
+                "requires_python": python_version,
+                "running_python": sys.version,
+                "date": repo.commit(args.target_sha).committed_datetime.isoformat(),
                 "flaky_test_candidate": args.test_path,
                 "flakiness": flakiness,
             },
