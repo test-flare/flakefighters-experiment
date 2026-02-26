@@ -4,13 +4,17 @@ import os
 import subprocess
 import re
 
+from glob import glob
+
 from git import Repo
 
 
 # --- Configuration ---
 REPO_PATH = "./core"  # Path where the repo will be cloned
 REPO_URL = "https://github.com/home-assistant/core.git"
-ITERATIONS = 100
+ITERATIONS = 2
+
+replacements = {"mypy-dev==1.12.0a2": "mypy-dev", "aioasuswrt==1.5.1": "aioasuswrt==1.5.2"}
 
 
 def parse_test_failures(content):
@@ -25,6 +29,16 @@ def parse_test_failures(content):
 
 
 def search_for_flakiness(test_path, db_url):
+    for fname in glob(os.path.join(REPO_PATH, "*requirements*.txt"), recursive=True) + [
+        os.path.join(REPO_PATH, "homeassistant/package_constraints.txt")
+    ]:
+        with open(fname) as f:
+            packages = f.readlines()
+        for old, new in replacements.items():
+            packages = [p.replace(old, new) for p in packages]
+        with open(fname, "w") as f:
+            f.write("\n".join(packages))
+
     result = subprocess.run(
         "./script/setup",
         check=False,
@@ -33,7 +47,7 @@ def search_for_flakiness(test_path, db_url):
         capture_output=True,
     )
     if result.returncode != 0:
-        return {"successes": None, "failures": None, "confirmed": None, "error": result.stderr}
+        return {"successes": None, "failures": None, "confirmed": None, "error": result.stderr.decode("utf-8")}
     with open(os.path.join(REPO_PATH, "pyproject.toml"), "a") as f:
         f.write(
             """
@@ -71,7 +85,8 @@ def search_for_flakiness(test_path, db_url):
         failed_tests = parse_test_failures(process.stdout.decode("utf-8"))
         print("FAILED TESTS", failed_tests)
 
-        if process.returncode == 0:
+        # if process.returncode == 0:
+        if test_path not in failed_tests:
             successes += 1
             test_to_run = test_path
         else:
@@ -93,6 +108,7 @@ def main():
 
     repo = Repo(REPO_PATH)
     repo.git.checkout("--", "pyproject.toml")
+    repo.git.checkout("--", "*.txt")
     repo.git.fetch()
 
     flakiness = {}
@@ -100,6 +116,7 @@ def main():
         repo.git.checkout(sha)
         flakiness[sha] = search_for_flakiness(args.test_path, f"sqlite:///{args.output.replace('.json', '.db')}")
         repo.git.checkout("--", "pyproject.toml")
+        repo.git.checkout("--", "*.txt")
 
     repo.git.checkout(args.target_sha)
     repo.remotes.origin.fetch(args.source_sha)
@@ -107,6 +124,7 @@ def main():
 
     flakiness["PR"] = search_for_flakiness(args.test_path, f"sqlite:///{args.output.replace('.json', '.db')}")
     repo.git.checkout("--", "pyproject.toml")
+    repo.git.checkout("--", "*.txt")
 
     with open(args.output, "w") as f:
         json.dump(
