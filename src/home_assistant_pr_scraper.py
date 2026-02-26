@@ -18,9 +18,9 @@ load_dotenv()
 # --- Configuration ---
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 REPO_NAME = "home-assistant/core"
-BASE = "master"
-NAME = "CI"  # Action name
-MAX_RUNS = 20  # Number of recent successful runs to check
+BASE = "dev"
+WORKFLOW_NAME = "ci.yaml"
+MAX_RUNS = 50  # Number of recent successful runs to check
 LOCAL_REPO = git.Repo("./core")
 HEAD = "ebd1f1b00f931095039973b40fe60355575cc781"
 
@@ -52,11 +52,21 @@ def get_test_metadata(
     try:
         # Find the commit that introduced the test function definition
         file_path, test_name = test_id.split("::")
+
         log_output = LOCAL_REPO.git.log(f"-L:{test_name}:{file_path}", "--reverse", "--format=%H", "--no-patch")
         introduction_commit_sha = log_output.strip().split("\n")[0]
         commits_since_introduction = list(
-            reversed(LOCAL_REPO.iter_commits(f"{introduction_commit_sha}..{head_commit}"))
+            LOCAL_REPO.iter_commits(f"{introduction_commit_sha}..{head_commit}", first_parent=True)
         )
+        commits_since_introduction += list(commits_since_introduction[-1].parents)
+
+        commits_since_introduction.reverse()
+
+        assert LOCAL_REPO.commit(head_commit) in commits_since_introduction, f"Head commit {head_commit} not in history"
+        assert (
+            LOCAL_REPO.commit(introduction_commit_sha) in commits_since_introduction
+        ), f"Introduction commit {introduction_commit_sha} not in history"
+
         introduction_date = LOCAL_REPO.commit(introduction_commit_sha).committed_datetime.isoformat()
 
         return {
@@ -64,6 +74,9 @@ def get_test_metadata(
             "introduction_date": introduction_date,
             "commits_since_introduction": len(commits_since_introduction),
             "commit_sample": [
+                LOCAL_REPO.commit(introduction_commit_sha).parents[0].hexsha
+            ]  # Commit before introduction
+            + [
                 commits_since_introduction[round(i)].hexsha
                 for i in linspace(0, len(commits_since_introduction) - 1, commit_sample_size)
             ],
@@ -115,12 +128,13 @@ def main():
     found_count = 0
     data = []
 
-    url = f"https://api.github.com/repos/{REPO_NAME}/actions/runs"
+    # url = f"https://api.github.com/repos/{REPO_NAME}/actions/runs"
+    url = f"https://api.github.com/repos/{REPO_NAME}/actions/workflows/{WORKFLOW_NAME}/runs"
     params = {
         # "state": "closed",
         "status": "completed",
         "base": BASE,
-        "name": NAME,
+        # "name": WORKFLOW_NAME,
         "sort": "updated",
         "direction": "desc",
         "per_page": 100,
@@ -128,7 +142,7 @@ def main():
     headers = {"Authorization": f"token {GITHUB_TOKEN}"} if GITHUB_TOKEN else {}
 
     # Pagination loop for PRs (GitHub API returns 100 max per page)
-    while url and found_count < MAX_RUNS:
+    while url:  # and found_count < MAX_RUNS:
         print(url)
         response = requests.get(url, params=params, headers=headers, timeout=30)
         response.raise_for_status()
@@ -151,7 +165,7 @@ def main():
             )
         data += metadata
         found_count += len(metadata)
-        with open("home_assistant_flakes3.json", "w") as f:
+        with open(f"home_assistant_flakes_{BASE}.json", "w") as f:
             json.dump(data, f, indent=2)
         if "next" in response.links and url:
             url = response.links["next"]["url"]

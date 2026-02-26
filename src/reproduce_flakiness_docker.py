@@ -3,7 +3,7 @@ import os
 import subprocess
 from multiprocessing import Pool
 
-JSON_FILE = "home_assistant_flakes3.json"
+JSON_FILE = "home_assistant_flakes_dev.json"
 
 
 def reproduce_flakiness(source_sha, target_sha, test_path, sample_shas):
