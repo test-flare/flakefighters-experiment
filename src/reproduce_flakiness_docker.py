@@ -2,8 +2,8 @@ import json
 import os
 import subprocess
 from multiprocessing import Pool
-import tomllib
 from datetime import datetime
+import sys
 
 from git import Repo
 from reproduce_flakiness import REPO_PATH
@@ -12,9 +12,9 @@ JSON_FILE = "home_assistant_flakes_dev.json"
 
 
 def get_python_requirement(repo, sha):
-    if repo.commit(sha).committed_datetime.timestamp() < datetime(2023, 7, 7).timestamp():  # date 3.13 came out
+    if repo.commit(sha).committed_datetime.timestamp() < datetime(2023, 8, 1).timestamp():  # date 3.12 came out
         return "3.11"
-    if repo.commit(sha).committed_datetime.timestamp() < datetime(2024, 10, 7).timestamp():  # date 3.13 came out
+    if repo.commit(sha).committed_datetime.timestamp() < datetime(2024, 10, 1).timestamp():  # date 3.13 came out
         return "3.12"
     if repo.commit(sha).committed_datetime.timestamp() < datetime(2026, 2, 2).timestamp():  # Date switching to 3.14
         return "3.13"
@@ -59,7 +59,6 @@ def main():
     args = []
     for run in data:
         for test in run["failed_tests"]:
-            print("SHA", run["target_sha"])
             python_version = get_python_requirement(repo, run["target_sha"])
             args.append(
                 {
@@ -70,7 +69,6 @@ def main():
                 }
             )
             for commit_sha in test["commit_sample"]:
-                print("  sha", commit_sha)
                 python_version = get_python_requirement(repo, commit_sha)
                 args.append({"target_sha": commit_sha, "test_id": test["test_id"], "python_version": python_version})
 
@@ -79,8 +77,14 @@ def main():
     #     for run in data
     #     for test in run["failed_tests"]
     # ]
+    hashes = None
+    if len(sys.argv) > 1:
+        hashes = sys.argv[1:]
+    if hashes is not None:
+        args = [a for a in args if a["target_sha"] in hashes]
+
     print("ARGS", args)
-    with Pool(6) as pool:
+    with Pool(8) as pool:
         pool.map(reproduce_flakiness, args)
 
 

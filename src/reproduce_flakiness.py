@@ -5,6 +5,7 @@ import subprocess
 import re
 import sys
 import tomllib
+import sys
 
 from glob import glob
 
@@ -19,7 +20,6 @@ ITERATIONS = 2
 replacements = {
     r"mypy\-dev==\d+\.\d+\.\w+": "mypy-dev",
     r"aioasuswrt==1\.5\.1": "aioasuswrt==1.5.2",
-    r"aiodns==3\..*": r"\g<0>\\npycares<5",
 }
 
 
@@ -35,15 +35,30 @@ def parse_test_failures(content):
 
 
 def search_for_flakiness(test_path, db_url):
-    for fname in glob(os.path.join(REPO_PATH, "*requirements*.txt"), recursive=True) + [
-        os.path.join(REPO_PATH, "homeassistant/package_constraints.txt")
-    ]:
+    package_constraints = os.path.join(REPO_PATH, "homeassistant/package_constraints.txt")
+    pycares_5 = False
+    josepy_5 = False
+    for fname in glob(os.path.join(REPO_PATH, "*requirements*.txt"), recursive=True) + [package_constraints]:
         with open(fname) as f:
             packages = f.readlines()
         for old, new in replacements.items():
             packages = [re.sub(old, new, p) for p in packages]
+        if any("aiodns==3" in line for line in packages):
+            josepy_5 = True
+        if any("hass-nabucasa==0.8" in line for line in packages):
+            pycares_5 = True
         with open(fname, "w") as f:
             f.write("\n".join(packages))
+        os.makedirs(f"outputs/{os.path.split(fname)[0]}", exist_ok=True)
+        with open(f"outputs/{fname}", "w") as f:
+            f.write("\n".join(packages))
+        with open(package_constraints, "a") as f:
+            if pycares_5:
+                # aiodns depends on pycares, but is not sufficiently strict on versioning:
+                # pycares 5+ is not compatible with python 3.14
+                f.write("pycares<5\n")
+            if josepy_5:
+                f.write("josepy<2\n")  # module 'josepy' has no attribute 'ComparableX509'
 
     setup_result = subprocess.run(
         "./script/setup",
@@ -114,6 +129,7 @@ def check_sha(repo, target_sha, test_path, db_url, source_sha=None):
 
 
 def main():
+    print("python reproduce_flakiness.py", " ".join(sys.argv[1:]))
     parser = argparse.ArgumentParser(
         prog="reproduce_flakiness",
         description="Attempts to reproduce flaky behaviour for a given test case of the home-assistant git repo.",
@@ -134,14 +150,14 @@ def main():
 
     flakiness = check_sha(repo, args.target_sha, args.test_path, db_url, args.source_sha)
 
-    python_version = ""
+    python_version = []
     if os.path.exists(f"{REPO_PATH}/.python_version"):
         with open(f"{REPO_PATH}/.python_version") as f:
-            python_version = f.readline().strip()
-    else:
-        with open(f"{REPO_PATH}/pyproject.toml", "rb") as f:
-            data = tomllib.load(f)
-            python_version += "||" + data.get("project", {}).get("requires-python")
+            python_version.APPEND(f.readline().strip())
+    with open(f"{REPO_PATH}/pyproject.toml", "rb") as f:
+        data = tomllib.load(f)
+        python_version.append(data.get("project", {}).get("requires-python", ""))
+    python_version = ",".join(python_version)
 
     with open(args.output, "w") as f:
         json.dump(
