@@ -13,3 +13,6 @@ dependencies = [
     "requests>=2.32.5",
 ]
 dynamic = ["version"]
+
+[tool.setuptools_scm]
+write_to = "src/_version.py"
