@@ -29,11 +29,14 @@ RUN python3 -m venv $VIRTUAL_ENV
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
 # Install pytest and the flake-fighting plugin
-RUN pip install --no-cache-dir pytest pytest-flakefighters
+RUN pip install --no-cache-dir pytest
+# pytest-flakefighters
+ADD "pytest-flakefighters" flakefighters
+RUN pip install -e flakefighters
 
 # Copy the entrypoint script
-COPY entrypoint.sh entrypoint.sh
-COPY src/reproduce_flakiness.py reproduce_flakiness.py
+COPY flakefighters-experiment/entrypoint.sh entrypoint.sh
+COPY flakefighters-experiment/src/reproduce_flakiness.py reproduce_flakiness.py
 RUN chmod +x entrypoint.sh
 RUN mkdir outputs
 

@@ -5,7 +5,6 @@ import subprocess
 import re
 import sys
 import tomllib
-import sys
 
 from glob import glob
 
@@ -37,16 +36,18 @@ def parse_test_failures(content):
 def search_for_flakiness(test_path, db_url):
     package_constraints = os.path.join(REPO_PATH, "homeassistant/package_constraints.txt")
     pycares_5 = False
-    josepy_5 = False
+    josepy_2 = False
     for fname in glob(os.path.join(REPO_PATH, "*requirements*.txt"), recursive=True) + [package_constraints]:
         with open(fname) as f:
             packages = f.readlines()
         for old, new in replacements.items():
             packages = [re.sub(old, new, p) for p in packages]
         if any("aiodns==3" in line for line in packages):
-            josepy_5 = True
-        if any("hass-nabucasa==0.8" in line for line in packages):
+            print("PYCARES_5")
             pycares_5 = True
+        if any("hass-nabucasa==0.8" in line for line in packages):
+            print("josepy_2")
+            josepy_2 = True
         with open(fname, "w") as f:
             f.write("\n".join(packages))
         os.makedirs(f"outputs/{os.path.split(fname)[0]}", exist_ok=True)
@@ -57,7 +58,7 @@ def search_for_flakiness(test_path, db_url):
                 # aiodns depends on pycares, but is not sufficiently strict on versioning:
                 # pycares 5+ is not compatible with python 3.14
                 f.write("pycares<5\n")
-            if josepy_5:
+            if josepy_2:
                 f.write("josepy<2\n")  # module 'josepy' has no attribute 'ComparableX509'
 
     setup_result = subprocess.run(
@@ -67,8 +68,19 @@ def search_for_flakiness(test_path, db_url):
         cwd=REPO_PATH,
         capture_output=True,
     )
-    if setup_result.returncode != 0:
+    extra_requirements_result = subprocess.run(
+        "pip install -r requirements_all.txt",
+        check=False,
+        shell=True,
+        cwd=REPO_PATH,
+        capture_output=True,
+    )
+
+    # TODO: Pip install flakefighters here to get correct versions of pytest and coverage, etc.
+
+    if setup_result.returncode != 0 or extra_requirements_result.returncode != 0:
         return {"successes": None, "failures": None, "confirmed": None, "error": setup_result.stderr.decode("utf-8")}
+
     with open(os.path.join(REPO_PATH, "pyproject.toml"), "a") as f:
         f.write(
             """
@@ -95,6 +107,7 @@ def search_for_flakiness(test_path, db_url):
         if successes and failures:
             confirmed = True
             break
+
         print(f"pytest {test_to_run} --database-url={db_url} --flakefighters")
         process = subprocess.run(
             f"pytest {test_to_run} --database-url={db_url} --flakefighters",
@@ -105,6 +118,10 @@ def search_for_flakiness(test_path, db_url):
         )
         failed_tests = parse_test_failures(process.stdout.decode("utf-8"))
         print("FAILED TESTS", failed_tests)
+        print(process.stdout.decode("utf8"))
+        print()
+        print()
+        print(process.stderr.decode("utf8"))
 
         # if process.returncode == 0:
         if test_path not in failed_tests:
@@ -159,6 +176,7 @@ def main():
         python_version.append(data.get("project", {}).get("requires-python", ""))
     python_version = ",".join(python_version)
 
+    print("OUTPUT", args.output)
     with open(args.output, "w") as f:
         json.dump(
             {
