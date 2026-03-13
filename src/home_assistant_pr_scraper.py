@@ -2,6 +2,7 @@ import io
 import json
 import os
 import zipfile
+import tomllib
 
 import git
 import requests
@@ -9,6 +10,7 @@ from dotenv import load_dotenv
 from github import Auth, Github, Repository
 from numpy import linspace
 from multiprocessing import Pool
+from datetime import datetime
 
 from reproduce_flakiness import parse_test_failures
 
@@ -21,7 +23,8 @@ REPO_NAME = "home-assistant/core"
 BASE = "dev"
 WORKFLOW_NAME = "ci.yaml"
 MAX_RUNS = 50  # Number of recent successful runs to check
-LOCAL_REPO = git.Repo("./core")
+REPO_PATH = "./core"
+LOCAL_REPO = git.Repo(REPO_PATH)
 HEAD = "ebd1f1b00f931095039973b40fe60355575cc781"
 
 
@@ -34,6 +37,17 @@ def get_failed_tests_from_logs(zip_content):
                 content = f.read().decode("utf-8", errors="ignore")
                 failed_tests += parse_test_failures(content)
     return failed_tests
+
+
+def requires_python(sha):
+    LOCAL_REPO.git.checkout("-f", sha)
+    if os.path.exists(f"{REPO_PATH}/.python_version"):
+        with open(f"{REPO_PATH}/.python_version") as f:
+            return "\n".join(f.readlines()).strip()
+    if os.path.exists(f"{REPO_PATH}/pyproject.toml"):
+        with open(f"{REPO_PATH}/pyproject.toml", "rb") as f:
+            return tomllib.load(f).get("project", {}).get("requires-python", "")
+    return ""
 
 
 def get_test_metadata(
@@ -68,18 +82,26 @@ def get_test_metadata(
         ), f"Introduction commit {introduction_commit_sha} not in history"
 
         introduction_date = LOCAL_REPO.commit(introduction_commit_sha).committed_datetime.isoformat()
+        commit_sample = [LOCAL_REPO.commit(introduction_commit_sha).parents[0].hexsha] + [  # Commit before introduction
+            commits_since_introduction[round(i)].hexsha
+            for i in linspace(0, len(commits_since_introduction) - 1, commit_sample_size)
+        ]
 
         return {
             "introduced_in": introduction_commit_sha,
             "introduction_date": introduction_date,
             "commits_since_introduction": len(commits_since_introduction),
-            "commit_sample": [
-                LOCAL_REPO.commit(introduction_commit_sha).parents[0].hexsha
-            ]  # Commit before introduction
-            + [
-                commits_since_introduction[round(i)].hexsha
-                for i in linspace(0, len(commits_since_introduction) - 1, commit_sample_size)
-            ],
+            "commit_sample": sorted(
+                [
+                    {
+                        "sha": sha,
+                        "committed_datetime": LOCAL_REPO.commit(sha).committed_datetime.isoformat(),
+                        "requires_python": requires_python(sha),
+                    }
+                    for sha in commit_sample
+                ],
+                key=lambda x: datetime.fromisoformat(x["committed_datetime"]),
+            ),
         }
     except git.exc.GitCommandError:
         return None
