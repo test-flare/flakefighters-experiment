@@ -79,36 +79,24 @@ def get_test_metadata(
         # Find the commit that introduced the test function definition
         file_path, test_name = test_id.split("::")
 
-        log_output = LOCAL_REPO.git.log(
-            f"-L:{test_name}:{file_path}", "--reverse", "--format=%H", "--no-patch"
-        )
+        log_output = LOCAL_REPO.git.log(f"-L:{test_name}:{file_path}", "--reverse", "--format=%H", "--no-patch")
         introduction_commit_sha = log_output.strip().split("\n")[0]
         commits_since_introduction = list(
-            LOCAL_REPO.iter_commits(
-                f"{introduction_commit_sha}..{head_commit}", first_parent=True
-            )
+            LOCAL_REPO.iter_commits(f"{introduction_commit_sha}..{head_commit}", first_parent=True)
         )
         commits_since_introduction += list(commits_since_introduction[-1].parents)
 
         commits_since_introduction.reverse()
 
-        assert (
-            LOCAL_REPO.commit(head_commit) in commits_since_introduction
-        ), f"Head commit {head_commit} not in history"
+        assert LOCAL_REPO.commit(head_commit) in commits_since_introduction, f"Head commit {head_commit} not in history"
         assert (
             LOCAL_REPO.commit(introduction_commit_sha) in commits_since_introduction
         ), f"Introduction commit {introduction_commit_sha} not in history"
 
-        introduction_date = LOCAL_REPO.commit(
-            introduction_commit_sha
-        ).committed_datetime.isoformat()
-        commit_sample = [
-            LOCAL_REPO.commit(introduction_commit_sha).parents[0].hexsha
-        ] + [  # Commit before introduction
+        introduction_date = LOCAL_REPO.commit(introduction_commit_sha).committed_datetime.isoformat()
+        commit_sample = [LOCAL_REPO.commit(introduction_commit_sha).parents[0].hexsha] + [  # Commit before introduction
             commits_since_introduction[round(i)].hexsha
-            for i in linspace(
-                0, len(commits_since_introduction) - 1, commit_sample_size
-            )
+            for i in linspace(0, len(commits_since_introduction) - 1, commit_sample_size)
         ]
 
         return {
@@ -119,9 +107,7 @@ def get_test_metadata(
                 [
                     {
                         "sha": sha,
-                        "committed_datetime": LOCAL_REPO.commit(
-                            sha
-                        ).committed_datetime.isoformat(),
+                        "committed_datetime": LOCAL_REPO.commit(sha).committed_datetime.isoformat(),
                         "requires_python": requires_python(sha),
                     }
                     for sha in commit_sample

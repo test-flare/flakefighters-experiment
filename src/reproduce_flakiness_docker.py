@@ -1,11 +1,12 @@
 import json
 import os
-import subprocess
-from multiprocessing import Pool
-import sys
 import re
+import subprocess
+import sys
+from multiprocessing import Pool
 
 from git import Repo
+
 from reproduce_flakiness import REPO_PATH
 
 JSON_FILE = "home_assistant_flakes_dev.json"
@@ -52,7 +53,13 @@ def main():
         for test in run["failed_tests"]:
             for commit in test["commit_sample"]:
                 python_version = requires_python(commit["requires_python"])
-                args.append({"target_sha": commit["sha"], "test_id": test["test_id"], "python_version": python_version})
+                args.append(
+                    {
+                        "target_sha": commit["sha"],
+                        "test_id": test["test_id"],
+                        "python_version": python_version,
+                    }
+                )
 
     hashes = None
     if len(sys.argv) > 1:

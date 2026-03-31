@@ -1,15 +1,13 @@
 import argparse
 import json
 import os
-import subprocess
 import re
+import subprocess
 import sys
 import tomllib
-
 from glob import glob
 
 from git import Repo
-
 
 # --- Configuration ---
 REPO_PATH = "./core"  # Path where the repo will be cloned
@@ -19,6 +17,7 @@ ITERATIONS = 2
 replacements = {
     r"mypy\-dev==\d+\.\d+\.\w+": "mypy-dev",
     r"aioasuswrt==1\.5\.1": "aioasuswrt==1.5.2",
+    "pyunifiprotect": "#pyunifiprotect",  # No longer availble in any form, but not necessary for the tests we need to run
 }
 
 
@@ -79,7 +78,12 @@ def search_for_flakiness(test_path, db_url):
     # TODO: Pip install flakefighters here to get correct versions of pytest and coverage, etc.
 
     if setup_result.returncode != 0 or extra_requirements_result.returncode != 0:
-        return {"successes": None, "failures": None, "confirmed": None, "error": setup_result.stderr.decode("utf-8")}
+        return {
+            "successes": None,
+            "failures": None,
+            "confirmed": None,
+            "error": setup_result.stderr.decode("utf-8") + "\n" + extra_requirements_result.stderr.decode("utf-8"),
+        }
 
     with open(os.path.join(REPO_PATH, "pyproject.toml"), "a") as f:
         f.write(
@@ -126,6 +130,7 @@ def search_for_flakiness(test_path, db_url):
         # if process.returncode == 0:
         if test_path not in failed_tests:
             successes += 1
+            # We want to run the whole test suite once and then just the flaky test candidate
             test_to_run = test_path
         else:
             failures += 1

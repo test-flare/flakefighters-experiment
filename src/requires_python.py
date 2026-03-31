@@ -1,10 +1,10 @@
+import datetime
 import json
-import tomllib
 import os
+import tomllib
+
 from git import Repo
 from tqdm import tqdm
-import datetime
-
 
 JSON_FILE = "home_assistant_flakes_dev_old.json"
 REPO_PATH = "./core"  # Path where the repo will be cloned
