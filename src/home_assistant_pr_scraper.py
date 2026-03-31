@@ -1,19 +1,23 @@
+"""
+This module uses the  GitHub API to look for actions that were run, failed, rerun, and passed.
+Results are saved to JSON in the specified location.
+"""
+
 import io
 import json
 import os
-import zipfile
 import tomllib
+import zipfile
+from datetime import datetime
+from multiprocessing import Pool
 
 import git
 import requests
 from dotenv import load_dotenv
 from github import Auth, Github, Repository
 from numpy import linspace
-from multiprocessing import Pool
-from datetime import datetime
 
 from reproduce_flakiness import parse_test_failures
-
 
 load_dotenv()
 
@@ -28,7 +32,11 @@ LOCAL_REPO = git.Repo(REPO_PATH)
 HEAD = "ebd1f1b00f931095039973b40fe60355575cc781"
 
 
-def get_failed_tests_from_logs(zip_content):
+def get_failed_tests_from_logs(zip_content: str):
+    """
+    Take the zip output and parse test failures from the log.
+    :param zip_content: The content of the zip file.
+    """
     failed_tests = []
 
     with zipfile.ZipFile(io.BytesIO(zip_content)) as z:
@@ -39,7 +47,11 @@ def get_failed_tests_from_logs(zip_content):
     return failed_tests
 
 
-def requires_python(sha):
+def requires_python(sha: str):
+    """
+    Returns the required python version string (if found) for a given commit sha.
+    :param sha: The commit sha.
+    """
     LOCAL_REPO.git.checkout("-f", sha)
     if os.path.exists(f"{REPO_PATH}/.python_version"):
         with open(f"{REPO_PATH}/.python_version") as f:
@@ -67,24 +79,36 @@ def get_test_metadata(
         # Find the commit that introduced the test function definition
         file_path, test_name = test_id.split("::")
 
-        log_output = LOCAL_REPO.git.log(f"-L:{test_name}:{file_path}", "--reverse", "--format=%H", "--no-patch")
+        log_output = LOCAL_REPO.git.log(
+            f"-L:{test_name}:{file_path}", "--reverse", "--format=%H", "--no-patch"
+        )
         introduction_commit_sha = log_output.strip().split("\n")[0]
         commits_since_introduction = list(
-            LOCAL_REPO.iter_commits(f"{introduction_commit_sha}..{head_commit}", first_parent=True)
+            LOCAL_REPO.iter_commits(
+                f"{introduction_commit_sha}..{head_commit}", first_parent=True
+            )
         )
         commits_since_introduction += list(commits_since_introduction[-1].parents)
 
         commits_since_introduction.reverse()
 
-        assert LOCAL_REPO.commit(head_commit) in commits_since_introduction, f"Head commit {head_commit} not in history"
+        assert (
+            LOCAL_REPO.commit(head_commit) in commits_since_introduction
+        ), f"Head commit {head_commit} not in history"
         assert (
             LOCAL_REPO.commit(introduction_commit_sha) in commits_since_introduction
         ), f"Introduction commit {introduction_commit_sha} not in history"
 
-        introduction_date = LOCAL_REPO.commit(introduction_commit_sha).committed_datetime.isoformat()
-        commit_sample = [LOCAL_REPO.commit(introduction_commit_sha).parents[0].hexsha] + [  # Commit before introduction
+        introduction_date = LOCAL_REPO.commit(
+            introduction_commit_sha
+        ).committed_datetime.isoformat()
+        commit_sample = [
+            LOCAL_REPO.commit(introduction_commit_sha).parents[0].hexsha
+        ] + [  # Commit before introduction
             commits_since_introduction[round(i)].hexsha
-            for i in linspace(0, len(commits_since_introduction) - 1, commit_sample_size)
+            for i in linspace(
+                0, len(commits_since_introduction) - 1, commit_sample_size
+            )
         ]
 
         return {
@@ -95,7 +119,9 @@ def get_test_metadata(
                 [
                     {
                         "sha": sha,
-                        "committed_datetime": LOCAL_REPO.commit(sha).committed_datetime.isoformat(),
+                        "committed_datetime": LOCAL_REPO.commit(
+                            sha
+                        ).committed_datetime.isoformat(),
                         "requires_python": requires_python(sha),
                     }
                     for sha in commit_sample
@@ -146,6 +172,9 @@ def get_run_metadata(remote: Repository, run: dict) -> dict:
 
 
 def main():
+    """
+    Main entrypoint. Scrape the repo and save the result to JSON.
+    """
     remote = Github(auth=Auth.Token(GITHUB_TOKEN)).get_repo(REPO_NAME)
     found_count = 0
     data = []
@@ -172,7 +201,10 @@ def main():
         if not runs:
             break
         viable_runs = list(
-            filter(lambda run: run["run_attempt"] > 1 or run["conclusion"] != "success", runs["workflow_runs"])
+            filter(
+                lambda run: run["run_attempt"] > 1 or run["conclusion"] != "success",
+                runs["workflow_runs"],
+            )
         )
         print(f"  {len(viable_runs)} viable runs")
         with Pool() as pool:
