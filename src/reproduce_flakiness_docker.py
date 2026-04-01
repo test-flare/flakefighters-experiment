@@ -13,7 +13,7 @@ def requires_python(constraint):
     match = re.search(r">=(3\.\d+)", constraint)
     if match:
         return match.group(1)
-    return "3.9"
+    return "3.10"
 
 
 def reproduce_flakiness(args):
