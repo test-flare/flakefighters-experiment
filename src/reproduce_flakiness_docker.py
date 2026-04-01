@@ -1,10 +1,8 @@
 import json
 import os
 import re
-import subprocess
 import sys
 from multiprocessing import Pool
-from time import sleep
 import docker
 
 JSON_FILE = "home_assistant_flakes_dev.json"
