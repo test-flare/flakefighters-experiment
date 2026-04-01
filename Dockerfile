@@ -31,7 +31,7 @@ ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 # Install pytest and the flake-fighting plugin
 RUN pip install --no-cache-dir pytest
 # RUN pip install pytest-flakefighters
-RUN pip install git+https://github.com/test-flare/pytest-flakefighters.git@08b46290448550be7a31f6066ff158a3b2176c3c
+RUN pip install git+https://github.com/test-flare/pytest-flakefighters.git@a4215e9b3c6471ca2e95870e0daebb1ee0c10d75
 
 
 # Copy the entrypoint script
