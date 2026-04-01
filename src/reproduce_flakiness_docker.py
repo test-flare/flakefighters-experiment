@@ -4,9 +4,12 @@ import re
 import subprocess
 import sys
 from multiprocessing import Pool
+from time import sleep
+import docker
 
 JSON_FILE = "home_assistant_flakes_dev.json"
 REPO_PATH = "./core"
+client = docker.from_env()
 
 
 def requires_python(constraint):
@@ -17,18 +20,23 @@ def requires_python(constraint):
 
 
 def reproduce_flakiness(args):
+
     command = (
-        f'docker run --rm -v {os.path.join(os.getcwd(), "outputs")}:/outputs flakehunter:{args["python_version"]} '
-        # f'docker run --rm -v {os.path.join(os.getcwd(), "outputs")}:/outputs flakehunter '
-        f'-t {args["target_sha"]} -T {args["test_id"]} -o /outputs/{args["test_id"]}/{args["target_sha"]}.json -r 2 -R {REPO_PATH}'
+        f"-t {args['target_sha']} "
+        f"-T {args['test_id']} "
+        f"-o /outputs/{args['test_id']}/{args['target_sha']}.json "
+        f"-r 2 "
+        f"-R {REPO_PATH}"
     )
     if "source_sha" in args:
         command += f" -s {args['source_sha']}"
-    print(command)
-    subprocess.run(
-        command,
-        check=False,
-        shell=True,
+
+    client.containers.run(
+        image=f"flakehunter:{args['python_version']}",
+        command=command,
+        volumes={os.path.join(os.getcwd(), "outputs"): {"bind": "/outputs", "mode": "rw"}},
+        auto_remove=True,  # Critical for cleanup
+        detach=False,  # Keep it in the foreground so we can catch signals
     )
 
 
@@ -63,7 +71,14 @@ def main():
 
     print("ARGS", args)
     with Pool() as pool:
-        pool.map(reproduce_flakiness, args)
+        try:
+            result = pool.map(reproduce_flakiness, args)
+        except KeyboardInterrupt:
+            pool.terminate()
+            # Use the SDK to find and kill all containers with your session label
+            for container in client.containers.list():
+                print(f"Killing {container}")
+                container.kill()
 
 
 if __name__ == "__main__":
