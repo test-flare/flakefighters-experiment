@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y \
 # Set working directory
 WORKDIR /workspaces/TestFlare
 
-# Clone the repo (shallow clone to save time, we will fetch the specific hash later)
+# Clone the repo and set up config with dummy details
 RUN git clone https://github.com/home-assistant/core.git; \
     git config --global user.email "you@example.com"; \
     git config --global user.name "Your Name"
@@ -30,13 +30,13 @@ ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
 # Install pytest and the flake-fighting plugin
 RUN pip install --no-cache-dir pytest
-# pytest-flakefighters
-ADD "pytest-flakefighters" flakefighters
-RUN pip install -e flakefighters
+# RUN pip install pytest-flakefighters
+RUN pip install git+https://github.com/test-flare/pytest-flakefighters.git@08b46290448550be7a31f6066ff158a3b2176c3c
+
 
 # Copy the entrypoint script
-COPY flakefighters-experiment/entrypoint.sh entrypoint.sh
-COPY flakefighters-experiment/src/reproduce_flakiness.py reproduce_flakiness.py
+COPY entrypoint.sh entrypoint.sh
+COPY src/reproduce_flakiness.py reproduce_flakiness.py
 RUN chmod +x entrypoint.sh
 RUN mkdir outputs
 

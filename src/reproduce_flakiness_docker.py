@@ -5,11 +5,8 @@ import subprocess
 import sys
 from multiprocessing import Pool
 
-from git import Repo
-
-from reproduce_flakiness import REPO_PATH
-
 JSON_FILE = "home_assistant_flakes_dev.json"
+REPO_PATH = "./core"
 
 
 def requires_python(constraint):
@@ -23,10 +20,11 @@ def reproduce_flakiness(args):
     command = (
         f'docker run --rm -v {os.path.join(os.getcwd(), "outputs")}:/outputs flakehunter:{args["python_version"]} '
         # f'docker run --rm -v {os.path.join(os.getcwd(), "outputs")}:/outputs flakehunter '
-        f'-t {args["target_sha"]} -T {args["test_id"]} -o /outputs/{args["test_id"]}/{args["target_sha"]}.json'
+        f'-t {args["target_sha"]} -T {args["test_id"]} -o /outputs/{args["test_id"]}/{args["target_sha"]}.json -r 2 -R {REPO_PATH}'
     )
     if "source_sha" in args:
         command += f" -s {args['source_sha']}"
+    print(command)
     subprocess.run(
         command,
         check=False,
@@ -43,10 +41,6 @@ def main():
 
     with open(JSON_FILE, "r") as f:
         data = json.load(f)
-
-    repo = Repo(REPO_PATH)
-    repo.git.reset("--hard")
-    repo.git.fetch()
 
     args = []
     for run in data:
@@ -68,7 +62,7 @@ def main():
         args = [a for a in args if a["target_sha"] in hashes]
 
     print("ARGS", args)
-    with Pool(8) as pool:
+    with Pool() as pool:
         pool.map(reproduce_flakiness, args)
 
 
