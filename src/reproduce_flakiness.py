@@ -8,7 +8,6 @@ import os
 import re
 import subprocess
 import sys
-import tomllib
 from glob import glob
 
 from git import Repo
