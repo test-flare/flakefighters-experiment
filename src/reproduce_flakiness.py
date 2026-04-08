@@ -53,31 +53,41 @@ class FlakinessReproducer:
             r"aioasuswrt==1\.5\.1": "aioasuswrt==1.5.2",
             # No longer availble in any form, but not necessary for the tests we need to run so we comment it out
             "pyunifiprotect": "#pyunifiprotect",
+            "pymazda": "#pymazda",
+            "urllib3>=1.26.5": "urllib3<1.27,>=1.21.1",
+            # Conflicting sub-dependencies (not required for testing)
+            "ibm-watson": "#ibm-watson",
+            "mycroftapi": "#mycroftapi",
+            "pysmarty": "#pysmarty",
+            "pytradfri": "#pytradfri",
+            "pycocotools": "#pycocotools",
         }
         package_constraints = os.path.join(self.repo_path, "homeassistant/package_constraints.txt")
-        pycares_5 = False
-        josepy_2 = False
+        constraints = set()
         for fname in glob(os.path.join(self.repo_path, "*requirements*.txt"), recursive=True) + [package_constraints]:
             with open(fname) as f:
                 packages = f.readlines()
             for old, new in replacements.items():
                 packages = [re.sub(old, new, p) for p in packages]
             if any("aiodns==3" in line for line in packages):
-                pycares_5 = True
+                # aiodns depends on pycares, but is not sufficiently strict on versioning:
+                # pycares 5+ is not compatible with python 3.14
+                constraints.add("pycares<5")
             if any("hass-nabucasa==0.8" in line for line in packages):
-                josepy_2 = True
+                # module 'josepy' has no attribute 'ComparableX509'
+                constraints.add("josepy<2")
+            if any("requests==2.28.1" in line for line in packages):
+                # requests 2.28.1 requires urllib3<1.27,>=1.21.1
+                constraints.add("urllib3<1.27,>=1.21.1")
             with open(fname, "w") as f:
                 f.write("\n".join(packages))
             os.makedirs(f"outputs/{os.path.split(fname)[0]}", exist_ok=True)
             with open(f"outputs/{fname}", "w") as f:
                 f.write("\n".join(packages))
             with open(package_constraints, "a") as f:
-                if pycares_5:
-                    # aiodns depends on pycares, but is not sufficiently strict on versioning:
-                    # pycares 5+ is not compatible with python 3.14
-                    f.write("pycares<5\n")
-                if josepy_2:
-                    f.write("josepy<2\n")  # module 'josepy' has no attribute 'ComparableX509'
+                for constraint in constraints:
+                    f.write(constraint + "\n")
+            import shutil
 
     def configure_pyproject(self):
         """
@@ -108,8 +118,21 @@ class FlakinessReproducer:
         self.fix_dependencies()
         self.configure_pyproject()
 
+        # setup_result = subprocess.run(
+        #     "/workspaces/TestFlare/venv/bin/python -m ensurepip --upgrade; /workspaces/TestFlare/venv/bin/python -m pip --disable-pip-version-check wheel --no-deps -w /tmp/tmp_joqglzh --quiet cython>=0.27.3",
+        #     check=False,
+        #     shell=True,
+        #     cwd=self.repo_path,
+        #     capture_output=True,
+        # )
+        # assert setup_result.returncode == 0, setup_result.stderr.decode("utf-8")
+
+        command = "pip install -r requirements_all.txt"
+        if "3.9" in sys.version:
+            command = "pip install setuptools==68; " + command
+
         setup_result = subprocess.run(
-            "./script/setup; pip install -r requirements_all.txt",
+            command,
             check=False,
             shell=True,
             cwd=self.repo_path,
@@ -117,11 +140,14 @@ class FlakinessReproducer:
         )
 
         if setup_result.returncode != 0:
+            print(setup_result.stdout.decode("utf-8"))
+            print(setup_result.stderr.decode("utf-8"))
             return {
                 "successes": None,
                 "failures": None,
                 "confirmed": None,
-                "error": setup_result.stderr.decode("utf-8"),
+                "stdout": setup_result.stdout.decode("utf-8"),
+                "stderr": setup_result.stderr.decode("utf-8"),
             }
 
         successes = 0
@@ -131,9 +157,6 @@ class FlakinessReproducer:
         test_to_run = self.test_path.split("::")[0]
 
         for _ in range(self.repeats):
-            if successes and failures:
-                confirmed = True
-                break
 
             process = subprocess.run(
                 f"pytest {test_to_run} --database-url={self.db_url} --flakefighters",
@@ -149,8 +172,13 @@ class FlakinessReproducer:
                 test_to_run = self.test_path
             else:
                 failures += 1
+            if successes and failures:
+                print("CONFIRMED!!!!!")
+                confirmed = True
+                break
 
         # assert setup_result or os.path.exists(db_url), f"No database at {db_url}"
+        print("CONFIRMED", confirmed)
         return {
             "successes": successes,
             "failures": failures,

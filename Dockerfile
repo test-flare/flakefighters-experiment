@@ -1,6 +1,13 @@
 ARG PY_VERSION=3.14
 FROM python:${PY_VERSION}-bookworm
 
+RUN addgroup --gid 1002 "flakehunter" && \
+    adduser --disabled-password --gecos "FlakeFighters User,,," \
+    --home /home/flakehunter --ingroup flakehunter --uid 1002 flakehunter
+
+# Set working directory
+WORKDIR /home/flakehunter
+
 # Install system dependencies required for Home Assistant core
 RUN apt-get update && apt-get install -y \
     git \
@@ -14,19 +21,14 @@ RUN apt-get update && apt-get install -y \
     libavfilter-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Set working directory
-WORKDIR /workspaces/TestFlare
+
+USER 1002:1002
+
 
 # Clone the repo and set up config with dummy details
 RUN git clone https://github.com/home-assistant/core.git; \
     git config --global user.email "you@example.com"; \
     git config --global user.name "Your Name"
-
-ENV VIRTUAL_ENV=venv
-RUN pip install virtualenv
-RUN virtualenv $VIRTUAL_ENV
-RUN python3 -m venv $VIRTUAL_ENV
-ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
 # Install pytest and the flake-fighting plugin
 RUN pip install --no-cache-dir pytest
@@ -35,9 +37,10 @@ RUN pip install git+https://github.com/test-flare/pytest-flakefighters.git@a4215
 
 
 # Copy the entrypoint script
-COPY entrypoint.sh entrypoint.sh
-COPY src/reproduce_flakiness.py reproduce_flakiness.py
+COPY --chown=1002:1002 entrypoint.sh entrypoint.sh
+COPY --chown=1002:1002 src/reproduce_flakiness.py reproduce_flakiness.py
 RUN chmod +x entrypoint.sh
-RUN mkdir outputs
+RUN mkdir outputs && chmod 777 outputs
+ENV PATH="$PATH:/home/flakehunter/.local/bin"
 
 ENTRYPOINT ["/bin/bash", "./entrypoint.sh"]

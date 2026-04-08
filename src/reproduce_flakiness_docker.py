@@ -22,20 +22,23 @@ def reproduce_flakiness(args):
     command = (
         f"-t {args['target_sha']} "
         f"-T {args['test_id']} "
-        f"-o /outputs/{args['test_id']}/{args['target_sha']}.json "
+        f"-o /home/flakehunter/outputs/{args['test_id']}/{args['target_sha']}.json "
         f"-r 2 "
         f"-R {REPO_PATH}"
     )
     if "source_sha" in args:
         command += f" -s {args['source_sha']}"
 
-    client.containers.run(
+    uid = os.getuid()
+    gid = os.getgid()
+    logs = client.containers.run(
         image=f"flakehunter:{args['python_version']}",
         command=command,
-        volumes={os.path.join(os.getcwd(), "outputs"): {"bind": "/outputs", "mode": "rw"}},
+        volumes={os.path.join(os.getcwd(), "outputs"): {"bind": "/home/flakehunter/outputs", "mode": "rw"}},
         auto_remove=True,  # Critical for cleanup
         detach=False,  # Keep it in the foreground so we can catch signals
     )
+    print(logs.decode("utf-8"))
 
 
 def main():
@@ -70,7 +73,7 @@ def main():
     print("ARGS", args)
     with Pool() as pool:
         try:
-            result = pool.map(reproduce_flakiness, args)
+            pool.map(reproduce_flakiness, args)
         except KeyboardInterrupt:
             pool.terminate()
             # Use the SDK to find and kill all containers with your session label
