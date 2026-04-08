@@ -70,6 +70,12 @@ def main():
     if hashes is not None:
         args = [a for a in args if a["target_sha"] in hashes]
 
+    args = list(
+        filter(
+            lambda arg: not os.path.exists(f"/home/flakehunter/outputs/{arg['test_id']}/{arg['target_sha']}.json"), args
+        )
+    )
+
     print("ARGS", args)
     with Pool() as pool:
         try:
