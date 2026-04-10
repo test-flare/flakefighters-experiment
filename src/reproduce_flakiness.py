@@ -118,16 +118,8 @@ class FlakinessReproducer:
         self.fix_dependencies()
         self.configure_pyproject()
 
-        # setup_result = subprocess.run(
-        #     "/workspaces/TestFlare/venv/bin/python -m ensurepip --upgrade; /workspaces/TestFlare/venv/bin/python -m pip --disable-pip-version-check wheel --no-deps -w /tmp/tmp_joqglzh --quiet cython>=0.27.3",
-        #     check=False,
-        #     shell=True,
-        #     cwd=self.repo_path,
-        #     capture_output=True,
-        # )
-        # assert setup_result.returncode == 0, setup_result.stderr.decode("utf-8")
+        command = "pip install -r requirements_all.txt --constraint homeassistant/package_constraints.txt; pip install -r requirements_test.txt --constraint homeassistant/package_constraints.txt"
 
-        command = "pip install -r requirements_all.txt"
         if "3.9" in sys.version:
             command = "pip install setuptools==68; " + command
 

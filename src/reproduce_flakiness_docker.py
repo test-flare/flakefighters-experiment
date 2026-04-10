@@ -29,16 +29,30 @@ def reproduce_flakiness(args):
     if "source_sha" in args:
         command += f" -s {args['source_sha']}"
 
-    uid = os.getuid()
-    gid = os.getgid()
-    logs = client.containers.run(
-        image=f"flakehunter:{args['python_version']}",
-        command=command,
+    # logs = client.containers.run(
+    #     image=f"flakehunter:{args['python_version']}",
+    #     command=command,
+    #     volumes={os.path.join(os.getcwd(), "outputs"): {"bind": "/home/flakehunter/outputs", "mode": "rw"}},
+    #     auto_remove=True,  # Critical for cleanup
+    #     detach=False,  # Keep it in the foreground so we can catch signals
+    # )
+
+    container = client.containers.create(
+        f"flakehunter:{args['python_version']}",
+        command,
         volumes={os.path.join(os.getcwd(), "outputs"): {"bind": "/home/flakehunter/outputs", "mode": "rw"}},
-        auto_remove=True,  # Critical for cleanup
-        detach=False,  # Keep it in the foreground so we can catch signals
     )
-    print(logs.decode("utf-8"))
+    container.start()
+    result = container.wait()
+    exit_code = result.get("StatusCode")
+    logs = container.logs().decode("utf-8")
+
+    if exit_code != 0:
+        print(f"Container failed with exit code {exit_code}")
+        print("--- Captured Logs ---")
+        print(logs if logs else "No logs captured.")
+
+    container.remove()
 
 
 def main():
@@ -77,6 +91,8 @@ def main():
     )
 
     print("ARGS", args)
+    # for arg in args:
+    #     reproduce_flakiness(arg)
     with Pool() as pool:
         try:
             pool.map(reproduce_flakiness, args)
