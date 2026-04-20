@@ -23,7 +23,7 @@ def reproduce_flakiness(args):
         f"-t {args['target_sha']} "
         f"-T {args['test_id']} "
         f"-o /home/flakehunter/outputs/{args['test_id']}/{args['target_sha']}.json "
-        f"-r 2 "
+        f"-r 100 "
         f"-R {REPO_PATH}"
     )
     if "source_sha" in args:
@@ -68,13 +68,20 @@ def main():
     args = []
     for run in data:
         for test in run["failed_tests"]:
-            args.append(
-                {
-                    "target_sha": run["target_sha"],
-                    "source_sha": run["source_sha"],
-                    "test_id": test["test_id"],
-                    "python_version": "3.14",
-                }
+            args.extend(
+                [
+                    {
+                        "target_sha": run["target_sha"],
+                        "source_sha": run["source_sha"],
+                        "test_id": test["test_id"],
+                        "python_version": "3.14",
+                    },
+                    {
+                        "target_sha": run["source_sha"],
+                        "test_id": test["test_id"],
+                        "python_version": "3.14",
+                    },
+                ]
             )
             # for commit in test["commit_sample"]:
             #     python_version = requires_python(commit["requires_python"])
