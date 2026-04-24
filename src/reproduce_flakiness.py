@@ -81,13 +81,9 @@ class FlakinessReproducer:
                 constraints.add("urllib3<1.27,>=1.21.1")
             with open(fname, "w") as f:
                 f.write("\n".join(packages))
-            os.makedirs(f"outputs/{os.path.split(fname)[0]}", exist_ok=True)
-            with open(f"outputs/{fname}", "w") as f:
-                f.write("\n".join(packages))
             with open(package_constraints, "a") as f:
                 for constraint in constraints:
                     f.write(constraint + "\n")
-            import shutil
 
     def configure_pyproject(self):
         """
@@ -188,7 +184,7 @@ class FlakinessReproducer:
         """
         repo = Repo(self.repo_path)
         repo.git.reset("--hard")
-        repo.git.fetch()
+        repo.git.fetch("origin", target_sha)
         repo.git.checkout(target_sha)
         if source_sha is not None:
             repo.remotes.origin.fetch(source_sha)
