@@ -33,8 +33,7 @@ RUN git clone https://github.com/home-assistant/core.git; \
 # Install pytest and the flake-fighting plugin
 RUN pip install --no-cache-dir pytest
 # RUN pip install pytest-flakefighters
-RUN pip install git+https://github.com/test-flare/pytest-flakefighters.git@a4215e9b3c6471ca2e95870e0daebb1ee0c10d75
-
+RUN pip install git+https://github.com/test-flare/pytest-flakefighters.git@5b5df80d4679f20fd563221553c0b827d6852027
 
 # Copy the entrypoint script
 COPY --chown=1002:1002 entrypoint.sh entrypoint.sh

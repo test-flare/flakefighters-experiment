@@ -92,7 +92,7 @@ class FlakinessReproducer:
         with open(os.path.join(self.repo_path, "pyproject.toml"), "a") as f:
             f.write(
                 """
-            [tool.pytest.ini_options.pytest_flakefighters.flakefighters.deflaker.DeFlaker]
+            [tool.pytest.ini_options.pytest_flakefighters.flakefighters.diffcov.DiffCov]
             run_live=false
 
             [tool.pytest.ini_options.pytest_flakefighters.flakefighters.traceback_matching.TracebackMatching]
