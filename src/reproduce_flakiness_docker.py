@@ -106,18 +106,18 @@ def main():
     )
 
     print("ARGS", args)
-    for arg in args:
-        reproduce_flakiness(arg)
-        print("DONE 1")
-    # with Pool() as pool:
-    #     try:
-    #         pool.map(reproduce_flakiness, args)
-    #     except KeyboardInterrupt:
-    #         pool.terminate()
-    #         # Use the SDK to find and kill all containers with your session label
-    #         for container in client.containers.list():
-    #             print(f"Killing {container}")
-    #             container.kill()
+    # for arg in args:
+    #     reproduce_flakiness(arg)
+    #     print("DONE 1")
+    with Pool() as pool:
+        try:
+            pool.map(reproduce_flakiness, args)
+        except KeyboardInterrupt:
+            pool.terminate()
+            # Use the SDK to find and kill all containers with your session label
+            for container in client.containers.list():
+                print(f"Killing {container}")
+                container.kill()
 
 
 if __name__ == "__main__":
