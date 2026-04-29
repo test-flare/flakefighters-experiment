@@ -105,6 +105,7 @@ def main():
         )
     )
 
+    args = list(filter(lambda arg: "anthropic" in arg["test_id"], args))
     print("ARGS", args)
     # for arg in args:
     #     reproduce_flakiness(arg)
