@@ -23,7 +23,7 @@ def reproduce_flakiness(args):
         f"-t {args['target_sha']} "
         f"-T {args['test_id']} "
         f"-o /home/flakehunter/outputs/{args['test_id']}/{args['target_sha']}.json "
-        f"-r 2 "
+        f"-r 100 "
         f"-R {REPO_PATH}"
     )
     if "source_sha" in args:
@@ -105,7 +105,6 @@ def main():
         )
     )
 
-    args = list(filter(lambda arg: "anthropic" in arg["test_id"], args))
     print("ARGS", args)
     # for arg in args:
     #     reproduce_flakiness(arg)
