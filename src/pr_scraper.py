@@ -9,7 +9,8 @@ import os
 import tomllib
 import zipfile
 from datetime import datetime
-from multiprocessing import Pool
+from tempfile import TemporaryDirectory
+from tqdm import tqdm
 
 import git
 import requests
@@ -29,7 +30,8 @@ WORKFLOW_NAME = "ci.yaml"
 MAX_RUNS = 50  # Number of recent successful runs to check
 REPO_PATH = "./core"
 LOCAL_REPO = git.Repo(REPO_PATH)
-HEAD = "ebd1f1b00f931095039973b40fe60355575cc781"
+# HEAD = "ebd1f1b00f931095039973b40fe60355575cc781"
+HEAD = "5d091d25d5e59919533a2abaa754259652ea6872"
 
 
 def get_failed_tests_from_logs(zip_content: str):
@@ -52,20 +54,22 @@ def requires_python(sha: str):
     Returns the required python version string (if found) for a given commit sha.
     :param sha: The commit sha.
     """
-    LOCAL_REPO.git.checkout("-f", sha)
-    if os.path.exists(f"{REPO_PATH}/.python_version"):
-        with open(f"{REPO_PATH}/.python_version") as f:
-            return "\n".join(f.readlines()).strip()
-    if os.path.exists(f"{REPO_PATH}/pyproject.toml"):
-        with open(f"{REPO_PATH}/pyproject.toml", "rb") as f:
-            return tomllib.load(f).get("project", {}).get("requires-python", "")
+
+    with TemporaryDirectory() as worktree_path:
+        LOCAL_REPO.git.worktree("add", worktree_path, sha)
+        if os.path.exists(f"{worktree_path}/.python_version"):
+            with open(f"{worktree_path}/.python_version") as f:
+                return "\n".join(f.readlines()).strip()
+        if os.path.exists(f"{worktree_path}/pyproject.toml"):
+            with open(f"{worktree_path}/pyproject.toml", "rb") as f:
+                return tomllib.load(f).get("project", {}).get("requires-python", "")
     return ""
 
 
 def get_test_metadata(
     test_id: str,
     head_commit: str = "HEAD",
-    commit_sample_size: int = 10,
+    commit_sample_size: int = 0,
 ) -> dict:
     """
     Finds the commit that introduced a test return an evenly spaced sample of commits between then and the head commit.
@@ -75,12 +79,20 @@ def get_test_metadata(
     :param head_commit: The commit hash representing the current moment in time. Defaults to HEAD.
     :param commit_sample_size: How many commits to return in the sample.
     """
+    # Find the commit that introduced the test function definition
     try:
-        # Find the commit that introduced the test function definition
         file_path, test_name = test_id.split("::")
 
         log_output = LOCAL_REPO.git.log(f"-L:{test_name}:{file_path}", "--reverse", "--format=%H", "--no-patch")
         introduction_commit_sha = log_output.strip().split("\n")[0]
+        introduction_date = LOCAL_REPO.commit(introduction_commit_sha).committed_datetime.isoformat()
+
+        if not commit_sample_size:
+            return {
+                "introduced_in": introduction_commit_sha,
+                "introduction_date": introduction_date,
+            }
+
         commits_since_introduction = list(
             LOCAL_REPO.iter_commits(f"{introduction_commit_sha}..{head_commit}", first_parent=True)
         )
@@ -93,7 +105,6 @@ def get_test_metadata(
             LOCAL_REPO.commit(introduction_commit_sha) in commits_since_introduction
         ), f"Introduction commit {introduction_commit_sha} not in history"
 
-        introduction_date = LOCAL_REPO.commit(introduction_commit_sha).committed_datetime.isoformat()
         commit_sample = [LOCAL_REPO.commit(introduction_commit_sha).parents[0].hexsha] + [  # Commit before introduction
             commits_since_introduction[round(i)].hexsha
             for i in linspace(0, len(commits_since_introduction) - 1, commit_sample_size)
@@ -128,6 +139,7 @@ def get_run_metadata(remote: Repository, run: dict) -> dict:
     """
     log_url = f"https://api.github.com/repos/{REPO_NAME}/actions/runs/{run['id']}/attempts/1/logs"
     headers = {"Authorization": f"token {GITHUB_TOKEN}"}
+
     response = requests.get(log_url, headers=headers, timeout=30)
     pulls = remote.get_commit(run["head_sha"]).get_pulls()
 
@@ -179,7 +191,7 @@ def main():
     headers = {"Authorization": f"token {GITHUB_TOKEN}"} if GITHUB_TOKEN else {}
 
     # Pagination loop for PRs (GitHub API returns 100 max per page)
-    while url:  # and found_count < MAX_RUNS:
+    while url and found_count < MAX_RUNS:
         print(url)
         response = requests.get(url, params=params, headers=headers, timeout=30)
         response.raise_for_status()
@@ -193,18 +205,23 @@ def main():
             )
         )
         print(f"  {len(viable_runs)} viable runs")
-        with Pool() as pool:
-            metadata = list(
-                filter(
-                    lambda x: x is not None,
-                    pool.starmap(
-                        get_run_metadata,
-                        map(lambda run: (remote, run), viable_runs),
-                    ),
-                )
-            )
-        data += metadata
-        found_count += len(metadata)
+
+        for run in tqdm(viable_runs):
+            metadata = get_run_metadata(remote, run)
+            if metadata is not None:
+                data.append(metadata)
+                found_count += 1
+
+        # with Pool() as pool:
+        #     metadata = list(
+        #         filter(
+        #             lambda x: x is not None,
+        #             pool.starmap(
+        #                 get_run_metadata,
+        #                 map(lambda run: (remote, run), viable_runs),
+        #             ),
+        #         )
+        #     )
         with open(f"home_assistant_flakes_{BASE}.json", "w") as f:
             json.dump(data, f, indent=2)
         if "next" in response.links and url:
