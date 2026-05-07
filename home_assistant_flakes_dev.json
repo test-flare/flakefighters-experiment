@@ -1,0 +1,2570 @@
+[
+  {
+    "run_id": 22357078884,
+    "run_attempt": 1,
+    "failed_tests": [
+      {
+        "test_id": "tests/components/concord232/test_alarm_control_panel.py::test_update_connection_error",
+        "introduced_in": "ac465689965ca43e141ce215b215f1264368da96",
+        "introduction_date": "2025-11-21T13:13:08+01:00",
+        "commits_since_introduction": 2590,
+        "commit_sample": [
+          {
+            "sha": "7c1b8ee02c932777d72170a9c68de06a3e30d8b1",
+            "committed_datetime": "2025-11-21T06:11:03-06:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "ac465689965ca43e141ce215b215f1264368da96",
+            "committed_datetime": "2025-11-21T13:13:08+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "83c4e2abc9a10e1c2264db7d90d9ff69cee98704",
+            "committed_datetime": "2025-11-27T14:16:46+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "35e6f504a31df418196c5fd674ffb6cb4f82d3b1",
+            "committed_datetime": "2025-12-05T10:17:43-06:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "b5015faffef06cf4bc39309dc6cee9cf4c9fffc7",
+            "committed_datetime": "2025-12-15T12:17:49+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "d4d26bccc1374fffd9f00550afae14d4155a8ef9",
+            "committed_datetime": "2025-12-22T17:30:06+00:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "c5a06657a3de604dad9ed548293761d463fad4c3",
+            "committed_datetime": "2026-01-02T16:47:39+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "01309191283eba3444ce0b0a751a93f45c139757",
+            "committed_datetime": "2026-01-14T14:34:52+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "20c0c5f655dcce219daebfa4f824770b21f5fc3f",
+            "committed_datetime": "2026-01-26T15:42:20+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "423a7cdbba461460a98069640e576067b066795f",
+            "committed_datetime": "2026-02-02T10:10:11+01:00",
+            "requires_python": ">=3.14.2"
+          },
+          {
+            "sha": "ebd1f1b00f931095039973b40fe60355575cc781",
+            "committed_datetime": "2026-02-11T11:27:33+01:00",
+            "requires_python": ">=3.14.2"
+          }
+        ]
+      },
+      {
+        "test_id": "tests/components/concord232/test_alarm_control_panel.py::test_update_connection_error",
+        "introduced_in": "ac465689965ca43e141ce215b215f1264368da96",
+        "introduction_date": "2025-11-21T13:13:08+01:00",
+        "commits_since_introduction": 2590,
+        "commit_sample": [
+          {
+            "sha": "7c1b8ee02c932777d72170a9c68de06a3e30d8b1",
+            "committed_datetime": "2025-11-21T06:11:03-06:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "ac465689965ca43e141ce215b215f1264368da96",
+            "committed_datetime": "2025-11-21T13:13:08+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "83c4e2abc9a10e1c2264db7d90d9ff69cee98704",
+            "committed_datetime": "2025-11-27T14:16:46+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "35e6f504a31df418196c5fd674ffb6cb4f82d3b1",
+            "committed_datetime": "2025-12-05T10:17:43-06:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "b5015faffef06cf4bc39309dc6cee9cf4c9fffc7",
+            "committed_datetime": "2025-12-15T12:17:49+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "d4d26bccc1374fffd9f00550afae14d4155a8ef9",
+            "committed_datetime": "2025-12-22T17:30:06+00:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "c5a06657a3de604dad9ed548293761d463fad4c3",
+            "committed_datetime": "2026-01-02T16:47:39+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "01309191283eba3444ce0b0a751a93f45c139757",
+            "committed_datetime": "2026-01-14T14:34:52+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "20c0c5f655dcce219daebfa4f824770b21f5fc3f",
+            "committed_datetime": "2026-01-26T15:42:20+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "423a7cdbba461460a98069640e576067b066795f",
+            "committed_datetime": "2026-02-02T10:10:11+01:00",
+            "requires_python": ">=3.14.2"
+          },
+          {
+            "sha": "ebd1f1b00f931095039973b40fe60355575cc781",
+            "committed_datetime": "2026-02-11T11:27:33+01:00",
+            "requires_python": ">=3.14.2"
+          }
+        ]
+      }
+    ],
+    "pr_number": 163942,
+    "pr_title": "Use native ARM runner for builder action, update to builder 2026.02.1",
+    "pr_created_at": "2026-02-24T15:15:21+00:00",
+    "merge_commit_sha": "e6ed0b5d149416cca28e0d87835acbd3940d0cd3",
+    "source_sha": "e6ed0b5d149416cca28e0d87835acbd3940d0cd3",
+    "target_sha": "7adfb0a40b6e7a944fd5aef967dcced36bfa9798"
+  },
+  {
+    "run_id": 22354508280,
+    "run_attempt": 1,
+    "failed_tests": [
+      {
+        "test_id": "tests/components/go2rtc/test_docker_version.py::test_docker_version_matches_recommended",
+        "introduced_in": "ba5472da90d7f3ffc55ac0662d55517997e24fdd",
+        "introduction_date": "2025-11-24T12:52:58+01:00",
+        "commits_since_introduction": 2469,
+        "commit_sample": [
+          {
+            "sha": "e20b88a54f016e0f3a9b01dd24a58f71a5cfbe4a",
+            "committed_datetime": "2025-11-24T12:32:55+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "ba5472da90d7f3ffc55ac0662d55517997e24fdd",
+            "committed_datetime": "2025-11-24T12:52:58+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "56515ad7b5a0fea1d43bcf447378072ac9c261d2",
+            "committed_datetime": "2025-12-02T05:03:53+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "c0aa35ff6d25c0ff2b594549269b23f50beaf715",
+            "committed_datetime": "2025-12-10T07:27:42+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "9ba252d8e31649b520e9918b09f6b0c048f3e7e8",
+            "committed_datetime": "2025-12-16T12:09:35+00:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "2d6ae8f907892e9a4888746e230efb19cfc01cfa",
+            "committed_datetime": "2025-12-24T21:24:36-08:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "35f4464d4a535fc87bda445cbe0b5f876149dd08",
+            "committed_datetime": "2026-01-06T00:24:20+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "644a40674d51f42171d2f20af58616c712763acc",
+            "committed_datetime": "2026-01-16T09:21:19+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "68b4ad722d83ac42c7a659565240c60571c0e7e8",
+            "committed_datetime": "2026-01-27T07:53:31+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "bd4fa0d5c249982f50169ade055f36f9d7f63f93",
+            "committed_datetime": "2026-02-02T19:02:09+01:00",
+            "requires_python": ">=3.14.2"
+          },
+          {
+            "sha": "ebd1f1b00f931095039973b40fe60355575cc781",
+            "committed_datetime": "2026-02-11T11:27:33+01:00",
+            "requires_python": ">=3.14.2"
+          }
+        ]
+      }
+    ],
+    "pr_number": 163803,
+    "pr_title": "Allow to disable seconds in DurationSelector",
+    "pr_created_at": "2026-02-22T17:56:22+00:00",
+    "merge_commit_sha": "5543107f6cf6e74a3b21b4ec22818bc5b1db81a8",
+    "source_sha": "b63dcb53cde5c67dd137d3851c812623c2cc763f",
+    "target_sha": "25787d2b756dd684f71aa8372d0987488913a249"
+  },
+  {
+    "run_id": 22353433015,
+    "run_attempt": 1,
+    "failed_tests": [
+      {
+        "test_id": "tests/components/go2rtc/test_docker_version.py::test_docker_version_matches_recommended",
+        "introduced_in": "ba5472da90d7f3ffc55ac0662d55517997e24fdd",
+        "introduction_date": "2025-11-24T12:52:58+01:00",
+        "commits_since_introduction": 2469,
+        "commit_sample": [
+          {
+            "sha": "e20b88a54f016e0f3a9b01dd24a58f71a5cfbe4a",
+            "committed_datetime": "2025-11-24T12:32:55+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "ba5472da90d7f3ffc55ac0662d55517997e24fdd",
+            "committed_datetime": "2025-11-24T12:52:58+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "56515ad7b5a0fea1d43bcf447378072ac9c261d2",
+            "committed_datetime": "2025-12-02T05:03:53+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "c0aa35ff6d25c0ff2b594549269b23f50beaf715",
+            "committed_datetime": "2025-12-10T07:27:42+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "9ba252d8e31649b520e9918b09f6b0c048f3e7e8",
+            "committed_datetime": "2025-12-16T12:09:35+00:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "2d6ae8f907892e9a4888746e230efb19cfc01cfa",
+            "committed_datetime": "2025-12-24T21:24:36-08:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "35f4464d4a535fc87bda445cbe0b5f876149dd08",
+            "committed_datetime": "2026-01-06T00:24:20+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "644a40674d51f42171d2f20af58616c712763acc",
+            "committed_datetime": "2026-01-16T09:21:19+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "68b4ad722d83ac42c7a659565240c60571c0e7e8",
+            "committed_datetime": "2026-01-27T07:53:31+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "bd4fa0d5c249982f50169ade055f36f9d7f63f93",
+            "committed_datetime": "2026-02-02T19:02:09+01:00",
+            "requires_python": ">=3.14.2"
+          },
+          {
+            "sha": "ebd1f1b00f931095039973b40fe60355575cc781",
+            "committed_datetime": "2026-02-11T11:27:33+01:00",
+            "requires_python": ">=3.14.2"
+          }
+        ]
+      },
+      {
+        "test_id": "tests/components/plaato/test_config_flow.py::test_show_config_form_validate_webhook",
+        "introduced_in": "285bd3aa917943684ba4e1c1883d3348cb5f20ce",
+        "introduction_date": "2021-02-01T07:12:56-10:00",
+        "commits_since_introduction": 59132,
+        "commit_sample": [
+          {
+            "sha": "83a75b02ea84fe34726c5215044ac9a185c36487",
+            "committed_datetime": "2021-02-01T17:55:16+01:00",
+            "requires_python": ""
+          },
+          {
+            "sha": "285bd3aa917943684ba4e1c1883d3348cb5f20ce",
+            "committed_datetime": "2021-02-01T07:12:56-10:00",
+            "requires_python": ""
+          },
+          {
+            "sha": "3c83f31dea914db05de6e6aa9ce73086341436d0",
+            "committed_datetime": "2021-10-25T14:10:56+02:00",
+            "requires_python": ""
+          },
+          {
+            "sha": "70e125850c595b70215d099ddbeac022204e140e",
+            "committed_datetime": "2022-04-21T22:39:51-07:00",
+            "requires_python": ""
+          },
+          {
+            "sha": "2ca7d0dd97c212c928df66fda80082bcc67076f6",
+            "committed_datetime": "2022-12-08T02:21:55+01:00",
+            "requires_python": ">=3.9.0"
+          },
+          {
+            "sha": "f52876c7f6120cac5ffc68e910376d561fc0f8fa",
+            "committed_datetime": "2023-07-29T17:37:40+02:00",
+            "requires_python": ">=3.11.0"
+          },
+          {
+            "sha": "ec4bd9a42153f17e94325c3cda3e60053b1d3df9",
+            "committed_datetime": "2024-02-19T22:28:42-05:00",
+            "requires_python": ">=3.11.0"
+          },
+          {
+            "sha": "4b2073ca592962d818e642e15e6acf8286f0efd6",
+            "committed_datetime": "2024-07-28T18:19:53-07:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "f3222045ae07e6618a97d592ccc6aa419eb281ce",
+            "committed_datetime": "2025-01-19T11:56:34+01:00",
+            "requires_python": ">=3.13.0"
+          },
+          {
+            "sha": "36156d9c544c6e713ae84668247f61e138785bb9",
+            "committed_datetime": "2025-07-15T19:43:44+02:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "ebd1f1b00f931095039973b40fe60355575cc781",
+            "committed_datetime": "2026-02-11T11:27:33+01:00",
+            "requires_python": ">=3.14.2"
+          }
+        ]
+      }
+    ],
+    "pr_number": 163723,
+    "pr_title": "Rename Powerfox integration to Powerfox Cloud",
+    "pr_created_at": "2026-02-21T17:55:58+00:00",
+    "merge_commit_sha": "6dc88409320999793ab48e60029f2076875a191d",
+    "source_sha": "b41c8a13ba8d7935663bb169fe96eb196bae488d",
+    "target_sha": "0e439583a6c69aa30b49d518503fcc151b8ff78e"
+  },
+  {
+    "run_id": 22351667480,
+    "run_attempt": 2,
+    "failed_tests": [
+      {
+        "test_id": "tests/components/go2rtc/test_docker_version.py::test_docker_version_matches_recommended",
+        "introduced_in": "ba5472da90d7f3ffc55ac0662d55517997e24fdd",
+        "introduction_date": "2025-11-24T12:52:58+01:00",
+        "commits_since_introduction": 2469,
+        "commit_sample": [
+          {
+            "sha": "e20b88a54f016e0f3a9b01dd24a58f71a5cfbe4a",
+            "committed_datetime": "2025-11-24T12:32:55+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "ba5472da90d7f3ffc55ac0662d55517997e24fdd",
+            "committed_datetime": "2025-11-24T12:52:58+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "56515ad7b5a0fea1d43bcf447378072ac9c261d2",
+            "committed_datetime": "2025-12-02T05:03:53+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "c0aa35ff6d25c0ff2b594549269b23f50beaf715",
+            "committed_datetime": "2025-12-10T07:27:42+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "9ba252d8e31649b520e9918b09f6b0c048f3e7e8",
+            "committed_datetime": "2025-12-16T12:09:35+00:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "2d6ae8f907892e9a4888746e230efb19cfc01cfa",
+            "committed_datetime": "2025-12-24T21:24:36-08:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "35f4464d4a535fc87bda445cbe0b5f876149dd08",
+            "committed_datetime": "2026-01-06T00:24:20+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "644a40674d51f42171d2f20af58616c712763acc",
+            "committed_datetime": "2026-01-16T09:21:19+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "68b4ad722d83ac42c7a659565240c60571c0e7e8",
+            "committed_datetime": "2026-01-27T07:53:31+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "bd4fa0d5c249982f50169ade055f36f9d7f63f93",
+            "committed_datetime": "2026-02-02T19:02:09+01:00",
+            "requires_python": ">=3.14.2"
+          },
+          {
+            "sha": "ebd1f1b00f931095039973b40fe60355575cc781",
+            "committed_datetime": "2026-02-11T11:27:33+01:00",
+            "requires_python": ">=3.14.2"
+          }
+        ]
+      }
+    ],
+    "pr_number": 163907,
+    "pr_title": "Use unix socket for Supervisor communication",
+    "pr_created_at": "2026-02-23T23:17:21+00:00",
+    "merge_commit_sha": "b6be7a12b18af9b50bd40fb2583e8844855ceece",
+    "source_sha": "b6be7a12b18af9b50bd40fb2583e8844855ceece",
+    "target_sha": "3693bc5878862bc40449050278d38f4d281b3769"
+  },
+  {
+    "run_id": 22327967437,
+    "run_attempt": 3,
+    "failed_tests": [
+      {
+        "test_id": "tests/components/zwave_js/test_device_trigger.py::test_no_controller_triggers",
+        "introduced_in": "41d5256533ec6ef1c102af0a43c7b7f26b8e06fb",
+        "introduction_date": "2022-12-06T22:56:33-05:00",
+        "commits_since_introduction": 39439,
+        "commit_sample": [
+          {
+            "sha": "1f3e5fb4fcdec1a4596df86e855b7b5f9c436bae",
+            "committed_datetime": "2022-12-07T00:24:08+00:00",
+            "requires_python": ">=3.9.0"
+          },
+          {
+            "sha": "41d5256533ec6ef1c102af0a43c7b7f26b8e06fb",
+            "committed_datetime": "2022-12-06T22:56:33-05:00",
+            "requires_python": ">=3.9.0"
+          },
+          {
+            "sha": "c1f716487c3834988d3be39b7ff572d6a0d38bd2",
+            "committed_datetime": "2023-05-11T11:28:33+02:00",
+            "requires_python": ">=3.10.0"
+          },
+          {
+            "sha": "d3a67cd9849684f12a8a1bba13776d50eed4e19c",
+            "committed_datetime": "2023-10-07T20:24:32-10:00",
+            "requires_python": ">=3.11.0"
+          },
+          {
+            "sha": "f4fd3633b49e062598e94a41d66a2380f89a5e1f",
+            "committed_datetime": "2024-02-19T20:16:06+01:00",
+            "requires_python": ">=3.11.0"
+          },
+          {
+            "sha": "67b3be84321a3bccb3e81e980a85e27744cd8a46",
+            "committed_datetime": "2024-06-04T14:21:03-05:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "242a3c66167758707ba399227db06b4e5121fa64",
+            "committed_datetime": "2024-09-24T15:13:12-07:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "fe4e001fa5d4b8ede9a1120acdf0c5f8b47194cb",
+            "committed_datetime": "2025-01-18T15:10:15-10:00",
+            "requires_python": ">=3.13.0"
+          },
+          {
+            "sha": "358d904c2cf66bc35262c5a048734fed352a5a8c",
+            "committed_datetime": "2025-05-07T09:24:51+02:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "258c9ff52b453458bc2b22619f67b7333330c1d6",
+            "committed_datetime": "2025-09-29T16:08:42+02:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "ebd1f1b00f931095039973b40fe60355575cc781",
+            "committed_datetime": "2026-02-11T11:27:33+01:00",
+            "requires_python": ">=3.14.2"
+          }
+        ]
+      }
+    ],
+    "pr_number": 159325,
+    "pr_title": "Add domain driven triggers to schedule helper",
+    "pr_created_at": "2025-12-17T20:30:59+00:00",
+    "merge_commit_sha": "53ce3bdf40bd91cc6b36974975e258c59f2f69d8",
+    "source_sha": "53ce3bdf40bd91cc6b36974975e258c59f2f69d8",
+    "target_sha": "c62ceee8fc22d19aad62e810e34ffbc23684f487"
+  },
+  {
+    "run_id": 22327014170,
+    "run_attempt": 2,
+    "failed_tests": [
+      {
+        "test_id": "tests/components/anthropic/test_conversation.py::test_function_call",
+        "introduced_in": "262d778a383aa9b05523c57663d80189d62997f9",
+        "introduction_date": "2024-08-01T22:50:10+02:00",
+        "commits_since_introduction": 19496,
+        "commit_sample": [
+          {
+            "sha": "80aa2c269b4e99ef21a3c5f950b31560272ae0f7",
+            "committed_datetime": "2024-08-01T22:39:17+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "262d778a383aa9b05523c57663d80189d62997f9",
+            "committed_datetime": "2024-08-01T22:50:10+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "40f808e9be666405f59935974834ca8b255aa248",
+            "committed_datetime": "2024-09-30T10:22:12+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "f5d323679f9a93ff7f55b988ceadb8d7a0f592e0",
+            "committed_datetime": "2024-11-26T13:07:32+01:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "a3cc68754fdf1442dfe0ea4acff63025cd6e758b",
+            "committed_datetime": "2025-01-22T10:18:41+01:00",
+            "requires_python": ">=3.13.0"
+          },
+          {
+            "sha": "13e9906929885774e859b8bc753349ef91588e39",
+            "committed_datetime": "2025-03-11T14:09:58+01:00",
+            "requires_python": ">=3.13.0"
+          },
+          {
+            "sha": "9e3684b00126c1c1093eb535bfb450684352334a",
+            "committed_datetime": "2025-05-09T15:11:22+02:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "a96e38871f4c197c147a229a4758776e21c8fe8e",
+            "committed_datetime": "2025-07-17T18:49:34+03:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "c8d676e06b1cf14edabab1b7bde56a6e67ca70cf",
+            "committed_datetime": "2025-09-30T21:27:43+02:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "f9219dd841b83ffc8afe32f55fdec56bd051da0f",
+            "committed_datetime": "2025-12-02T12:04:17+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "ebd1f1b00f931095039973b40fe60355575cc781",
+            "committed_datetime": "2026-02-11T11:27:33+01:00",
+            "requires_python": ">=3.14.2"
+          }
+        ]
+      }
+    ],
+    "pr_number": 163891,
+    "pr_title": "Add IQS to Anthropic",
+    "pr_created_at": "2026-02-23T19:19:14+00:00",
+    "merge_commit_sha": "c416f4d5eb3eec99ef054fb3c432f92edd0ebd5e",
+    "source_sha": "4e8c22cc32baa9064406cb71510bb63087c6dbde",
+    "target_sha": "3693bc5878862bc40449050278d38f4d281b3769"
+  },
+  {
+    "run_id": 22325266181,
+    "run_attempt": 1,
+    "failed_tests": [
+      {
+        "test_id": "tests/components/telegram_bot/test_diagnostics.py::test_diagnostics",
+        "introduced_in": "a6e575ecfa5b1f4e4073083cfc4baae003cd44e4",
+        "introduction_date": "2025-10-09T18:20:00+02:00",
+        "commits_since_introduction": 3981,
+        "commit_sample": [
+          {
+            "sha": "85392ae16738d434b4b0628391b7363245f76f03",
+            "committed_datetime": "2025-10-09T18:15:22+02:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "a6e575ecfa5b1f4e4073083cfc4baae003cd44e4",
+            "committed_datetime": "2025-10-09T18:20:00+02:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "d6db50fcc736109f3d74b125790fef2ed8ea54f2",
+            "committed_datetime": "2025-10-21T15:29:49+02:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "9f595a94fbd28ceeeeacaaa4bb82e2f9c0ddf99f",
+            "committed_datetime": "2025-11-05T14:15:46+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "a13cdbdf3d8fa0f243513e330404fe736fb3a96e",
+            "committed_datetime": "2025-11-18T16:07:37+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "3073a99ce687fbb01d6d090f624733d6ac13fc79",
+            "committed_datetime": "2025-12-01T19:27:30+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "0149de6ba6c9cd690a0e970ef45266ce74fe7418",
+            "committed_datetime": "2025-12-14T21:16:52+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "f0ddb9ff2cfbbc92060cf5b0c712859842c6c0c7",
+            "committed_datetime": "2025-12-28T15:08:18+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "16527ba70716cc5c2ab0b42b9484325dd42b9020",
+            "committed_datetime": "2026-01-14T01:15:36+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "630a9b48967686750590e1c6e9478bb582ca4409",
+            "committed_datetime": "2026-01-28T14:04:23+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "ebd1f1b00f931095039973b40fe60355575cc781",
+            "committed_datetime": "2026-02-11T11:27:33+01:00",
+            "requires_python": ">=3.14.2"
+          }
+        ]
+      },
+      {
+        "test_id": "tests/components/tessie/test_number.py::test_numbers",
+        "introduced_in": "c824d06a8c5e540d8913edc3768821d3bce45269",
+        "introduction_date": "2023-12-22T11:57:21+01:00",
+        "commits_since_introduction": 28578,
+        "commit_sample": [
+          {
+            "sha": "9237740103a2e38f749fc78c7175faaadb1ab10b",
+            "committed_datetime": "2023-12-22T11:37:03+01:00",
+            "requires_python": ">=3.11.0"
+          },
+          {
+            "sha": "c824d06a8c5e540d8913edc3768821d3bce45269",
+            "committed_datetime": "2023-12-22T11:57:21+01:00",
+            "requires_python": ">=3.11.0"
+          },
+          {
+            "sha": "421014bf8dbb80dec553cb0655b226d188a95800",
+            "committed_datetime": "2024-03-06T06:31:22+01:00",
+            "requires_python": ">=3.11.0"
+          },
+          {
+            "sha": "2545b7d3bbd9cca7744bb1b990419db347859493",
+            "committed_datetime": "2024-05-28T14:23:01+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "2cd44567627c5e7ba44baf28191c76512d856b08",
+            "committed_datetime": "2024-08-16T17:07:57+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "1e42a38473c0ff2927aa8fe8e80627e4ecf8c47a",
+            "committed_datetime": "2024-11-05T19:53:05+01:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "37b23a9691f2e18d3395bea8459635c7bf1eb117",
+            "committed_datetime": "2025-01-28T19:17:34+01:00",
+            "requires_python": ">=3.13.0"
+          },
+          {
+            "sha": "1d845623a8efc09d2222205dc0acb803728ced8e",
+            "committed_datetime": "2025-04-15T21:24:32-06:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "f5d68a4ea40e76358ea29d09839d093cdfd8c9c7",
+            "committed_datetime": "2025-07-22T10:10:59+02:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "28675eee33dd0d427d4221c18706a7d98bd26900",
+            "committed_datetime": "2025-11-03T07:50:56+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "ebd1f1b00f931095039973b40fe60355575cc781",
+            "committed_datetime": "2026-02-11T11:27:33+01:00",
+            "requires_python": ">=3.14.2"
+          }
+        ]
+      }
+    ],
+    "pr_number": 163899,
+    "pr_title": "Bump anthropic to 0.83.0",
+    "pr_created_at": "2026-02-23T21:19:39+00:00",
+    "merge_commit_sha": "8d5f24ca96021eda6e02821c5b611aa97de5f9c7",
+    "source_sha": "8d5f24ca96021eda6e02821c5b611aa97de5f9c7",
+    "target_sha": "fc9bdb3cb1241911f047be9b4f7fe4ebbabfbf7e"
+  },
+  {
+    "run_id": 22323155500,
+    "run_attempt": 1,
+    "failed_tests": [
+      {
+        "test_id": "tests/components/bsblan/test_sensor.py::test_sensor_entity_properties",
+        "introduced_in": "1ae1391cb927d80879ebe6d004817eaae06c5ebf",
+        "introduction_date": "2024-09-13T14:04:00+02:00",
+        "commits_since_introduction": 18064,
+        "commit_sample": [
+          {
+            "sha": "6aa07243cd450164db7944dbe66bed1f52a590b6",
+            "committed_datetime": "2024-09-13T13:36:54+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "1ae1391cb927d80879ebe6d004817eaae06c5ebf",
+            "committed_datetime": "2024-09-13T14:04:00+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "39f418f2d27086ca1004fd5e3bef5bd6e6bbe900",
+            "committed_datetime": "2024-10-30T17:31:41+01:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "8eebbd45bdc441225cd0439e447e4b8c4603512d",
+            "committed_datetime": "2024-12-22T22:52:35+01:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "361933091c53626ec7a04f0c8577e9924a681a2c",
+            "committed_datetime": "2025-02-08T22:04:38+01:00",
+            "requires_python": ">=3.13.0"
+          },
+          {
+            "sha": "c0e8f1474568b366cebcd274ac12fbfb3277d352",
+            "committed_datetime": "2025-03-31T10:25:48+02:00",
+            "requires_python": ">=3.13.0"
+          },
+          {
+            "sha": "01ea58eb9ba5763d6032637509aabfcbc161f43d",
+            "committed_datetime": "2025-05-26T11:54:00-05:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "d43f21c2e238bb18d39ebcb29e2e810e8c04e4bc",
+            "committed_datetime": "2025-08-01T20:35:48+02:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "b5f163cc853608b77fa15d5a4c6d50c3f954a30a",
+            "committed_datetime": "2025-10-08T13:28:11+02:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "7d065bf314e9987107fefc5c5215e713620683b7",
+            "committed_datetime": "2025-12-05T20:00:09+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "ebd1f1b00f931095039973b40fe60355575cc781",
+            "committed_datetime": "2026-02-11T11:27:33+01:00",
+            "requires_python": ">=3.14.2"
+          }
+        ]
+      }
+    ],
+    "pr_number": 163879,
+    "pr_title": "Add energy sensor to bsblan",
+    "pr_created_at": "2026-02-23T15:21:39+00:00",
+    "merge_commit_sha": "df5ca153c74decc057adea217662209963a44b56",
+    "source_sha": "67d163e83139b26d1efdf0428540d1327ad8d197",
+    "target_sha": "8927960fca71f7cde69d48df65fddf4ef6a16f89"
+  },
+  {
+    "run_id": 22317097698,
+    "run_attempt": 2,
+    "failed_tests": [
+      {
+        "test_id": "tests/components/bang_olufsen/test_event.py::test_button_event_creation_balance",
+        "introduced_in": "2054988790f89063dfd9ca8d114f97b7063e11d4",
+        "introduction_date": "2024-12-31T21:55:24+01:00",
+        "commits_since_introduction": 13834,
+        "commit_sample": [
+          {
+            "sha": "f1ad3040b831c355366b58df7b4d9a1805d948de",
+            "committed_datetime": "2024-12-31T15:52:29-05:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "2054988790f89063dfd9ca8d114f97b7063e11d4",
+            "committed_datetime": "2024-12-31T21:55:24+01:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "417a595b73946634a73790a50b36bb9d37e357b8",
+            "committed_datetime": "2025-02-05T08:25:05-05:00",
+            "requires_python": ">=3.13.0"
+          },
+          {
+            "sha": "e42a6c5d4f9da680e68502f97f40be77ec136c3f",
+            "committed_datetime": "2025-03-14T09:51:49+02:00",
+            "requires_python": ">=3.13.0"
+          },
+          {
+            "sha": "5cd4a0ced66a0df9135ba2e09aa6300d31a3600c",
+            "committed_datetime": "2025-04-24T23:55:10+02:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "2d60115ec67c76133251478d06cc625ac2421e00",
+            "committed_datetime": "2025-06-10T16:22:53+02:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "aa1314c1d549af03589b25ff468e119449e4c09e",
+            "committed_datetime": "2025-07-28T17:43:20+02:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "3c542b8d43b5cb331774c639711e8004b2727463",
+            "committed_datetime": "2025-09-22T13:49:41-07:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "81a9ef1df017780939660dc45f76b927fba73a60",
+            "committed_datetime": "2025-11-06T15:54:30+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "54300430b784b4d633fd65d4a70a5e3762244245",
+            "committed_datetime": "2025-12-18T19:14:23+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "ebd1f1b00f931095039973b40fe60355575cc781",
+            "committed_datetime": "2026-02-11T11:27:33+01:00",
+            "requires_python": ">=3.14.2"
+          }
+        ]
+      }
+    ],
+    "pr_number": 163371,
+    "pr_title": "OAuth helper enhance response text logger",
+    "pr_created_at": "2026-02-18T14:52:48+00:00",
+    "merge_commit_sha": "6c446849758b3373330b38308192ebe311f2ec44",
+    "source_sha": "6c7763dc4f6d8b6bab8665dfd92c6bb2decb99e8",
+    "target_sha": "bae4de37536f50bd50d273730af89ad12bd70042"
+  },
+  {
+    "run_id": 22315760261,
+    "run_attempt": 1,
+    "failed_tests": [
+      {
+        "test_id": "tests/components/go2rtc/test_docker_version.py::test_docker_version_matches_recommended",
+        "introduced_in": "ba5472da90d7f3ffc55ac0662d55517997e24fdd",
+        "introduction_date": "2025-11-24T12:52:58+01:00",
+        "commits_since_introduction": 2469,
+        "commit_sample": [
+          {
+            "sha": "e20b88a54f016e0f3a9b01dd24a58f71a5cfbe4a",
+            "committed_datetime": "2025-11-24T12:32:55+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "ba5472da90d7f3ffc55ac0662d55517997e24fdd",
+            "committed_datetime": "2025-11-24T12:52:58+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "56515ad7b5a0fea1d43bcf447378072ac9c261d2",
+            "committed_datetime": "2025-12-02T05:03:53+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "c0aa35ff6d25c0ff2b594549269b23f50beaf715",
+            "committed_datetime": "2025-12-10T07:27:42+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "9ba252d8e31649b520e9918b09f6b0c048f3e7e8",
+            "committed_datetime": "2025-12-16T12:09:35+00:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "2d6ae8f907892e9a4888746e230efb19cfc01cfa",
+            "committed_datetime": "2025-12-24T21:24:36-08:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "35f4464d4a535fc87bda445cbe0b5f876149dd08",
+            "committed_datetime": "2026-01-06T00:24:20+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "644a40674d51f42171d2f20af58616c712763acc",
+            "committed_datetime": "2026-01-16T09:21:19+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "68b4ad722d83ac42c7a659565240c60571c0e7e8",
+            "committed_datetime": "2026-01-27T07:53:31+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "bd4fa0d5c249982f50169ade055f36f9d7f63f93",
+            "committed_datetime": "2026-02-02T19:02:09+01:00",
+            "requires_python": ">=3.14.2"
+          },
+          {
+            "sha": "ebd1f1b00f931095039973b40fe60355575cc781",
+            "committed_datetime": "2026-02-11T11:27:33+01:00",
+            "requires_python": ">=3.14.2"
+          }
+        ]
+      }
+    ],
+    "pr_number": 163826,
+    "pr_title": "Rename Litter-Robot integration to Whisker",
+    "pr_created_at": "2026-02-23T06:13:05+00:00",
+    "merge_commit_sha": "ffeb759aba370a3234a0060a3cea2d8dc6833afa",
+    "source_sha": "e7c9e0ba016491ee4c031cd9fe4494b17341232b",
+    "target_sha": "88d7954d7c2bbe598798fbc4404111d2fd3432e9"
+  },
+  {
+    "run_id": 22311943101,
+    "run_attempt": 1,
+    "failed_tests": [
+      {
+        "test_id": "tests/helpers/test_config_entry_oauth2_flow.py::test_abort_if_oauth_token_error",
+        "introduced_in": "787fb3b954bdb1b7ac5cde71b024cb5e2c602e59",
+        "introduction_date": "2023-11-11T11:02:51+01:00",
+        "commits_since_introduction": 29694,
+        "commit_sample": [
+          {
+            "sha": "667a453a3523d7d7f513f3859c8564109b8af240",
+            "committed_datetime": "2023-11-11T09:39:41+01:00",
+            "requires_python": ">=3.11.0"
+          },
+          {
+            "sha": "787fb3b954bdb1b7ac5cde71b024cb5e2c602e59",
+            "committed_datetime": "2023-11-11T11:02:51+01:00",
+            "requires_python": ">=3.11.0"
+          },
+          {
+            "sha": "53062a81cc8f4ca3b799972107c506652e94c9f5",
+            "committed_datetime": "2024-02-16T16:51:14+01:00",
+            "requires_python": ">=3.11.0"
+          },
+          {
+            "sha": "8238cd9f22990ca6a237580fcebf3020fcedfaaa",
+            "committed_datetime": "2024-05-04T12:41:25+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "fcccd85ac4dafb85ed7e2f5390b58463c70ac88a",
+            "committed_datetime": "2024-07-24T21:40:05+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "c46cccc3cd30130973b93a6ed679e5aa7d60f098",
+            "committed_datetime": "2024-10-20T15:48:42+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "2a514ebc3f0c583cc83e945cd0b21cfec83e6d13",
+            "committed_datetime": "2025-01-17T17:43:47+01:00",
+            "requires_python": ">=3.13.0"
+          },
+          {
+            "sha": "30e50d261d309276cf23927de0d7e283be3cf36b",
+            "committed_datetime": "2025-04-03T16:23:59-04:00",
+            "requires_python": ">=3.13.0"
+          },
+          {
+            "sha": "5e883cfb129859f06b54fb282756abbdadd50557",
+            "committed_datetime": "2025-07-14T21:03:49-10:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "dbda31f6d5a1611b0cc9f0ff8883d48b6eaed944",
+            "committed_datetime": "2025-10-29T14:31:51+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "ebd1f1b00f931095039973b40fe60355575cc781",
+            "committed_datetime": "2026-02-11T11:27:33+01:00",
+            "requires_python": ">=3.14.2"
+          }
+        ]
+      },
+      {
+        "test_id": "tests/helpers/test_config_entry_oauth2_flow.py::test_abort_if_oauth_token_error",
+        "introduced_in": "787fb3b954bdb1b7ac5cde71b024cb5e2c602e59",
+        "introduction_date": "2023-11-11T11:02:51+01:00",
+        "commits_since_introduction": 29694,
+        "commit_sample": [
+          {
+            "sha": "667a453a3523d7d7f513f3859c8564109b8af240",
+            "committed_datetime": "2023-11-11T09:39:41+01:00",
+            "requires_python": ">=3.11.0"
+          },
+          {
+            "sha": "787fb3b954bdb1b7ac5cde71b024cb5e2c602e59",
+            "committed_datetime": "2023-11-11T11:02:51+01:00",
+            "requires_python": ">=3.11.0"
+          },
+          {
+            "sha": "53062a81cc8f4ca3b799972107c506652e94c9f5",
+            "committed_datetime": "2024-02-16T16:51:14+01:00",
+            "requires_python": ">=3.11.0"
+          },
+          {
+            "sha": "8238cd9f22990ca6a237580fcebf3020fcedfaaa",
+            "committed_datetime": "2024-05-04T12:41:25+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "fcccd85ac4dafb85ed7e2f5390b58463c70ac88a",
+            "committed_datetime": "2024-07-24T21:40:05+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "c46cccc3cd30130973b93a6ed679e5aa7d60f098",
+            "committed_datetime": "2024-10-20T15:48:42+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "2a514ebc3f0c583cc83e945cd0b21cfec83e6d13",
+            "committed_datetime": "2025-01-17T17:43:47+01:00",
+            "requires_python": ">=3.13.0"
+          },
+          {
+            "sha": "30e50d261d309276cf23927de0d7e283be3cf36b",
+            "committed_datetime": "2025-04-03T16:23:59-04:00",
+            "requires_python": ">=3.13.0"
+          },
+          {
+            "sha": "5e883cfb129859f06b54fb282756abbdadd50557",
+            "committed_datetime": "2025-07-14T21:03:49-10:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "dbda31f6d5a1611b0cc9f0ff8883d48b6eaed944",
+            "committed_datetime": "2025-10-29T14:31:51+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "ebd1f1b00f931095039973b40fe60355575cc781",
+            "committed_datetime": "2026-02-11T11:27:33+01:00",
+            "requires_python": ">=3.14.2"
+          }
+        ]
+      },
+      {
+        "test_id": "tests/helpers/test_config_entry_oauth2_flow.py::test_abort_if_oauth_token_error",
+        "introduced_in": "787fb3b954bdb1b7ac5cde71b024cb5e2c602e59",
+        "introduction_date": "2023-11-11T11:02:51+01:00",
+        "commits_since_introduction": 29694,
+        "commit_sample": [
+          {
+            "sha": "667a453a3523d7d7f513f3859c8564109b8af240",
+            "committed_datetime": "2023-11-11T09:39:41+01:00",
+            "requires_python": ">=3.11.0"
+          },
+          {
+            "sha": "787fb3b954bdb1b7ac5cde71b024cb5e2c602e59",
+            "committed_datetime": "2023-11-11T11:02:51+01:00",
+            "requires_python": ">=3.11.0"
+          },
+          {
+            "sha": "53062a81cc8f4ca3b799972107c506652e94c9f5",
+            "committed_datetime": "2024-02-16T16:51:14+01:00",
+            "requires_python": ">=3.11.0"
+          },
+          {
+            "sha": "8238cd9f22990ca6a237580fcebf3020fcedfaaa",
+            "committed_datetime": "2024-05-04T12:41:25+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "fcccd85ac4dafb85ed7e2f5390b58463c70ac88a",
+            "committed_datetime": "2024-07-24T21:40:05+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "c46cccc3cd30130973b93a6ed679e5aa7d60f098",
+            "committed_datetime": "2024-10-20T15:48:42+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "2a514ebc3f0c583cc83e945cd0b21cfec83e6d13",
+            "committed_datetime": "2025-01-17T17:43:47+01:00",
+            "requires_python": ">=3.13.0"
+          },
+          {
+            "sha": "30e50d261d309276cf23927de0d7e283be3cf36b",
+            "committed_datetime": "2025-04-03T16:23:59-04:00",
+            "requires_python": ">=3.13.0"
+          },
+          {
+            "sha": "5e883cfb129859f06b54fb282756abbdadd50557",
+            "committed_datetime": "2025-07-14T21:03:49-10:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "dbda31f6d5a1611b0cc9f0ff8883d48b6eaed944",
+            "committed_datetime": "2025-10-29T14:31:51+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "ebd1f1b00f931095039973b40fe60355575cc781",
+            "committed_datetime": "2026-02-11T11:27:33+01:00",
+            "requires_python": ">=3.14.2"
+          }
+        ]
+      },
+      {
+        "test_id": "tests/helpers/test_config_entry_oauth2_flow.py::test_abort_if_oauth_token_error",
+        "introduced_in": "787fb3b954bdb1b7ac5cde71b024cb5e2c602e59",
+        "introduction_date": "2023-11-11T11:02:51+01:00",
+        "commits_since_introduction": 29694,
+        "commit_sample": [
+          {
+            "sha": "667a453a3523d7d7f513f3859c8564109b8af240",
+            "committed_datetime": "2023-11-11T09:39:41+01:00",
+            "requires_python": ">=3.11.0"
+          },
+          {
+            "sha": "787fb3b954bdb1b7ac5cde71b024cb5e2c602e59",
+            "committed_datetime": "2023-11-11T11:02:51+01:00",
+            "requires_python": ">=3.11.0"
+          },
+          {
+            "sha": "53062a81cc8f4ca3b799972107c506652e94c9f5",
+            "committed_datetime": "2024-02-16T16:51:14+01:00",
+            "requires_python": ">=3.11.0"
+          },
+          {
+            "sha": "8238cd9f22990ca6a237580fcebf3020fcedfaaa",
+            "committed_datetime": "2024-05-04T12:41:25+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "fcccd85ac4dafb85ed7e2f5390b58463c70ac88a",
+            "committed_datetime": "2024-07-24T21:40:05+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "c46cccc3cd30130973b93a6ed679e5aa7d60f098",
+            "committed_datetime": "2024-10-20T15:48:42+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "2a514ebc3f0c583cc83e945cd0b21cfec83e6d13",
+            "committed_datetime": "2025-01-17T17:43:47+01:00",
+            "requires_python": ">=3.13.0"
+          },
+          {
+            "sha": "30e50d261d309276cf23927de0d7e283be3cf36b",
+            "committed_datetime": "2025-04-03T16:23:59-04:00",
+            "requires_python": ">=3.13.0"
+          },
+          {
+            "sha": "5e883cfb129859f06b54fb282756abbdadd50557",
+            "committed_datetime": "2025-07-14T21:03:49-10:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "dbda31f6d5a1611b0cc9f0ff8883d48b6eaed944",
+            "committed_datetime": "2025-10-29T14:31:51+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "ebd1f1b00f931095039973b40fe60355575cc781",
+            "committed_datetime": "2026-02-11T11:27:33+01:00",
+            "requires_python": ">=3.14.2"
+          }
+        ]
+      },
+      {
+        "test_id": "tests/helpers/test_config_entry_oauth2_flow.py::test_abort_if_oauth_token_error",
+        "introduced_in": "787fb3b954bdb1b7ac5cde71b024cb5e2c602e59",
+        "introduction_date": "2023-11-11T11:02:51+01:00",
+        "commits_since_introduction": 29694,
+        "commit_sample": [
+          {
+            "sha": "667a453a3523d7d7f513f3859c8564109b8af240",
+            "committed_datetime": "2023-11-11T09:39:41+01:00",
+            "requires_python": ">=3.11.0"
+          },
+          {
+            "sha": "787fb3b954bdb1b7ac5cde71b024cb5e2c602e59",
+            "committed_datetime": "2023-11-11T11:02:51+01:00",
+            "requires_python": ">=3.11.0"
+          },
+          {
+            "sha": "53062a81cc8f4ca3b799972107c506652e94c9f5",
+            "committed_datetime": "2024-02-16T16:51:14+01:00",
+            "requires_python": ">=3.11.0"
+          },
+          {
+            "sha": "8238cd9f22990ca6a237580fcebf3020fcedfaaa",
+            "committed_datetime": "2024-05-04T12:41:25+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "fcccd85ac4dafb85ed7e2f5390b58463c70ac88a",
+            "committed_datetime": "2024-07-24T21:40:05+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "c46cccc3cd30130973b93a6ed679e5aa7d60f098",
+            "committed_datetime": "2024-10-20T15:48:42+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "2a514ebc3f0c583cc83e945cd0b21cfec83e6d13",
+            "committed_datetime": "2025-01-17T17:43:47+01:00",
+            "requires_python": ">=3.13.0"
+          },
+          {
+            "sha": "30e50d261d309276cf23927de0d7e283be3cf36b",
+            "committed_datetime": "2025-04-03T16:23:59-04:00",
+            "requires_python": ">=3.13.0"
+          },
+          {
+            "sha": "5e883cfb129859f06b54fb282756abbdadd50557",
+            "committed_datetime": "2025-07-14T21:03:49-10:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "dbda31f6d5a1611b0cc9f0ff8883d48b6eaed944",
+            "committed_datetime": "2025-10-29T14:31:51+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "ebd1f1b00f931095039973b40fe60355575cc781",
+            "committed_datetime": "2026-02-11T11:27:33+01:00",
+            "requires_python": ">=3.14.2"
+          }
+        ]
+      }
+    ],
+    "pr_number": 163371,
+    "pr_title": "OAuth helper enhance response text logger",
+    "pr_created_at": "2026-02-18T14:52:48+00:00",
+    "merge_commit_sha": "f32b198f10db3c40a0b1de6ccb1f866310205d51",
+    "source_sha": "6c7763dc4f6d8b6bab8665dfd92c6bb2decb99e8",
+    "target_sha": "bae4de37536f50bd50d273730af89ad12bd70042"
+  },
+  {
+    "run_id": 22306749190,
+    "run_attempt": 1,
+    "failed_tests": [
+      {
+        "test_id": "tests/components/go2rtc/test_docker_version.py::test_docker_version_matches_recommended",
+        "introduced_in": "ba5472da90d7f3ffc55ac0662d55517997e24fdd",
+        "introduction_date": "2025-11-24T12:52:58+01:00",
+        "commits_since_introduction": 2469,
+        "commit_sample": [
+          {
+            "sha": "e20b88a54f016e0f3a9b01dd24a58f71a5cfbe4a",
+            "committed_datetime": "2025-11-24T12:32:55+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "ba5472da90d7f3ffc55ac0662d55517997e24fdd",
+            "committed_datetime": "2025-11-24T12:52:58+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "56515ad7b5a0fea1d43bcf447378072ac9c261d2",
+            "committed_datetime": "2025-12-02T05:03:53+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "c0aa35ff6d25c0ff2b594549269b23f50beaf715",
+            "committed_datetime": "2025-12-10T07:27:42+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "9ba252d8e31649b520e9918b09f6b0c048f3e7e8",
+            "committed_datetime": "2025-12-16T12:09:35+00:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "2d6ae8f907892e9a4888746e230efb19cfc01cfa",
+            "committed_datetime": "2025-12-24T21:24:36-08:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "35f4464d4a535fc87bda445cbe0b5f876149dd08",
+            "committed_datetime": "2026-01-06T00:24:20+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "644a40674d51f42171d2f20af58616c712763acc",
+            "committed_datetime": "2026-01-16T09:21:19+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "68b4ad722d83ac42c7a659565240c60571c0e7e8",
+            "committed_datetime": "2026-01-27T07:53:31+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "bd4fa0d5c249982f50169ade055f36f9d7f63f93",
+            "committed_datetime": "2026-02-02T19:02:09+01:00",
+            "requires_python": ">=3.14.2"
+          },
+          {
+            "sha": "ebd1f1b00f931095039973b40fe60355575cc781",
+            "committed_datetime": "2026-02-11T11:27:33+01:00",
+            "requires_python": ">=3.14.2"
+          }
+        ]
+      }
+    ],
+    "pr_number": 163449,
+    "pr_title": "Add Zinvolt integration",
+    "pr_created_at": "2026-02-19T11:04:05+00:00",
+    "merge_commit_sha": "f71d3a0c7916d87eab2e011e72ec4fae94bd952f",
+    "source_sha": "f71d3a0c7916d87eab2e011e72ec4fae94bd952f",
+    "target_sha": "4615b4d1044db6dd3258c531e5e9e75c32af4774"
+  },
+  {
+    "run_id": 22306710327,
+    "run_attempt": 3,
+    "failed_tests": [
+      {
+        "test_id": "tests/components/go2rtc/test_docker_version.py::test_docker_version_matches_recommended",
+        "introduced_in": "ba5472da90d7f3ffc55ac0662d55517997e24fdd",
+        "introduction_date": "2025-11-24T12:52:58+01:00",
+        "commits_since_introduction": 2469,
+        "commit_sample": [
+          {
+            "sha": "e20b88a54f016e0f3a9b01dd24a58f71a5cfbe4a",
+            "committed_datetime": "2025-11-24T12:32:55+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "ba5472da90d7f3ffc55ac0662d55517997e24fdd",
+            "committed_datetime": "2025-11-24T12:52:58+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "56515ad7b5a0fea1d43bcf447378072ac9c261d2",
+            "committed_datetime": "2025-12-02T05:03:53+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "c0aa35ff6d25c0ff2b594549269b23f50beaf715",
+            "committed_datetime": "2025-12-10T07:27:42+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "9ba252d8e31649b520e9918b09f6b0c048f3e7e8",
+            "committed_datetime": "2025-12-16T12:09:35+00:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "2d6ae8f907892e9a4888746e230efb19cfc01cfa",
+            "committed_datetime": "2025-12-24T21:24:36-08:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "35f4464d4a535fc87bda445cbe0b5f876149dd08",
+            "committed_datetime": "2026-01-06T00:24:20+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "644a40674d51f42171d2f20af58616c712763acc",
+            "committed_datetime": "2026-01-16T09:21:19+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "68b4ad722d83ac42c7a659565240c60571c0e7e8",
+            "committed_datetime": "2026-01-27T07:53:31+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "bd4fa0d5c249982f50169ade055f36f9d7f63f93",
+            "committed_datetime": "2026-02-02T19:02:09+01:00",
+            "requires_python": ">=3.14.2"
+          },
+          {
+            "sha": "ebd1f1b00f931095039973b40fe60355575cc781",
+            "committed_datetime": "2026-02-11T11:27:33+01:00",
+            "requires_python": ">=3.14.2"
+          }
+        ]
+      }
+    ],
+    "pr_number": 163840,
+    "pr_title": "Bump python-bsblan to 5.0.1",
+    "pr_created_at": "2026-02-23T12:46:12+00:00",
+    "merge_commit_sha": "45f0028eb91c11aa40cbb3c73b648a1c637324ef",
+    "source_sha": "45f0028eb91c11aa40cbb3c73b648a1c637324ef",
+    "target_sha": "6299e8cb7758a9caf2eea9dd67835a8fefebfa35"
+  },
+  {
+    "run_id": 22300979531,
+    "run_attempt": 1,
+    "failed_tests": [
+      {
+        "test_id": "tests/components/matter/test_sensor.py::test_sensors",
+        "introduced_in": "9d96a021c78ad86e4ed32da618eaf54a08430191",
+        "introduction_date": "2022-12-06T21:39:00+01:00",
+        "commits_since_introduction": 39447,
+        "commit_sample": [
+          {
+            "sha": "e7a06046a7f1732bc4a74c4ab64a70c8ee3a2beb",
+            "committed_datetime": "2022-12-06T14:28:06-05:00",
+            "requires_python": ">=3.9.0"
+          },
+          {
+            "sha": "9d96a021c78ad86e4ed32da618eaf54a08430191",
+            "committed_datetime": "2022-12-06T21:39:00+01:00",
+            "requires_python": ">=3.9.0"
+          },
+          {
+            "sha": "26f7843800556fac3ec22a8216d9fe293c96a955",
+            "committed_datetime": "2023-05-11T09:10:06+02:00",
+            "requires_python": ">=3.10.0"
+          },
+          {
+            "sha": "4709e60ff64c7e7ba3930d3ec312980bc339bf72",
+            "committed_datetime": "2023-10-07T19:39:04+02:00",
+            "requires_python": ">=3.11.0"
+          },
+          {
+            "sha": "2250baab211d14d184869c1238f944056b916f2f",
+            "committed_datetime": "2024-02-19T14:36:51+01:00",
+            "requires_python": ">=3.11.0"
+          },
+          {
+            "sha": "513262c0ff593ca975d84d15a428d87af471166a",
+            "committed_datetime": "2024-06-04T20:58:58+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "3d4ac7ca631515e072a9e907ee8d314542bb7e68",
+            "committed_datetime": "2024-09-24T23:00:43+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "6690b121c039e6a018c99cb8b960760a3af962ab",
+            "committed_datetime": "2025-01-18T13:47:30-10:00",
+            "requires_python": ">=3.13.0"
+          },
+          {
+            "sha": "dbffd8c0ffae2d04c54d5c07d593c50343e3f35c",
+            "committed_datetime": "2025-05-07T09:11:31+02:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "89c5d498a409db1bb29a48338dc633e4306afea5",
+            "committed_datetime": "2025-09-29T15:39:29+02:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "ebd1f1b00f931095039973b40fe60355575cc781",
+            "committed_datetime": "2026-02-11T11:27:33+01:00",
+            "requires_python": ">=3.14.2"
+          }
+        ]
+      }
+    ],
+    "pr_number": 163195,
+    "pr_title": " Add allow_none_value=True to MatterDiscoverySchema for electrical power attributes",
+    "pr_created_at": "2026-02-16T18:09:13+00:00",
+    "merge_commit_sha": "8a50eee358270c5151b777b949f3c0f32a9dd8eb",
+    "source_sha": "f2a145c47d4a102483c1df0f57f808d13ed9361d",
+    "target_sha": "13737ff2e65cd952f29407df3ba23ad176a4ecfc"
+  },
+  {
+    "run_id": 22297619879,
+    "run_attempt": 1,
+    "failed_tests": [
+      {
+        "test_id": "tests/components/fritzbox/test_init.py::test_setup",
+        "introduced_in": "c87ecf0ff639bb8f8b33da1bb1b4c16aeed39c90",
+        "introduction_date": "2020-04-20T15:00:07+02:00",
+        "commits_since_introduction": 64656,
+        "commit_sample": [
+          {
+            "sha": "2123f6f133e50b65d3b5746fa0b624f9eef5e6d0",
+            "committed_datetime": "2020-04-20T14:53:20+02:00",
+            "requires_python": ""
+          },
+          {
+            "sha": "c87ecf0ff639bb8f8b33da1bb1b4c16aeed39c90",
+            "committed_datetime": "2020-04-20T15:00:07+02:00",
+            "requires_python": ""
+          },
+          {
+            "sha": "2887eeb32f00d22dd6dc67decb1c80151de8c603",
+            "committed_datetime": "2021-04-15T11:17:32+02:00",
+            "requires_python": ""
+          },
+          {
+            "sha": "2dfd4c49dae1ec49bae12964ad79e5f7ff068cbd",
+            "committed_datetime": "2021-12-20T12:56:56-06:00",
+            "requires_python": ""
+          },
+          {
+            "sha": "16e75f2a134ade73f38420463a42f960430ad3e6",
+            "committed_datetime": "2022-07-28T18:15:27+02:00",
+            "requires_python": ">=3.9.0"
+          },
+          {
+            "sha": "823c5062968c1284661972de7bbd7d574b8870a2",
+            "committed_datetime": "2023-04-06T10:26:34+02:00",
+            "requires_python": ">=3.10.0"
+          },
+          {
+            "sha": "d50b79ba842c60bbf1dfaf5992a43ad5d23eba98",
+            "committed_datetime": "2023-12-18T08:42:53+01:00",
+            "requires_python": ">=3.11.0"
+          },
+          {
+            "sha": "2f5f372f6385928e12f9ec600d6b9c5b857fd39b",
+            "committed_datetime": "2024-06-12T18:08:01+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "d78a24ba33b9ac8918ebe000849997a5fd77aef7",
+            "committed_datetime": "2024-12-16T09:54:01+01:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "13ce27c94c6c7b58dc6f93197f74b43feb9dd74f",
+            "committed_datetime": "2025-06-26T11:06:36+02:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "ebd1f1b00f931095039973b40fe60355575cc781",
+            "committed_datetime": "2026-02-11T11:27:33+01:00",
+            "requires_python": ">=3.14.2"
+          }
+        ]
+      }
+    ],
+    "pr_number": 163818,
+    "pr_title": "Increase request timeout from 10 to 20s in FRITZ!SmartHome",
+    "pr_created_at": "2026-02-22T21:59:03+00:00",
+    "merge_commit_sha": "d09d475e25ce7c6d5f96674fba23eb13d1f7e3ea",
+    "source_sha": "0d1e86e38900588c5640441698c97ecad4d6a70b",
+    "target_sha": "d5ef379cafaa256015c72d4a683da6ec5127d2b0"
+  },
+  {
+    "run_id": 22284987158,
+    "run_attempt": 1,
+    "failed_tests": [
+      {
+        "test_id": "tests/components/recorder/test_migration_from_schema_32.py::test_stats_timestamp_conversion_is_reentrant",
+        "introduced_in": "268425b5e3db07525635b06e3b0c1e2863ae513f",
+        "introduction_date": "2023-10-22T23:34:43-04:00",
+        "commits_since_introduction": 30237,
+        "commit_sample": [
+          {
+            "sha": "4ee9a6f1301d34c2f287038ebf0c3acdc5f93517",
+            "committed_datetime": "2023-10-22T12:02:15-10:00",
+            "requires_python": ">=3.11.0"
+          },
+          {
+            "sha": "268425b5e3db07525635b06e3b0c1e2863ae513f",
+            "committed_datetime": "2023-10-22T23:34:43-04:00",
+            "requires_python": ">=3.11.0"
+          },
+          {
+            "sha": "8a9478b71400e8be84948b5fa959f109fb27c342",
+            "committed_datetime": "2024-02-04T17:05:51+01:00",
+            "requires_python": ">=3.11.0"
+          },
+          {
+            "sha": "1c0c0bb0bc0e3e0ecdae11c84dc4154e22358265",
+            "committed_datetime": "2024-04-21T11:08:39+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "2e71c8d43b03443ddef87979a83eead8c8d65683",
+            "committed_datetime": "2024-07-12T16:29:55+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "70973150797aaf51ad944e1ad64ec7aef73a9adf",
+            "committed_datetime": "2024-10-11T15:54:28+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "11fa6b2e4e6386763d8914d0716272472d2df5c0",
+            "committed_datetime": "2025-01-11T23:06:06-06:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "3d49000c75a7fe8e446deda44a73adfdfdc125b1",
+            "committed_datetime": "2025-03-30T18:11:09+01:00",
+            "requires_python": ">=3.13.0"
+          },
+          {
+            "sha": "ce5f06b1e545b6af9ed0c47467e8c4340b0c2446",
+            "committed_datetime": "2025-07-09T21:43:02+02:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "2442a96c275dbdb8b907487b19b0f0720f6bd08c",
+            "committed_datetime": "2025-10-28T12:44:06+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "ebd1f1b00f931095039973b40fe60355575cc781",
+            "committed_datetime": "2026-02-11T11:27:33+01:00",
+            "requires_python": ">=3.14.2"
+          }
+        ]
+      }
+    ],
+    "pr_number": 163789,
+    "pr_title": "Mark fan entity type hints as mandatory",
+    "pr_created_at": "2026-02-22T15:14:21+00:00",
+    "merge_commit_sha": "19b606841d4eb73184fcf0058abfc90e43064a30",
+    "source_sha": "ce269233f27a8a9429396199b552321744bbf2cc",
+    "target_sha": "12d06e80adf63162fd5551b333dd50d5c682fc2b"
+  },
+  {
+    "run_id": 22283105735,
+    "run_attempt": 1,
+    "failed_tests": [
+      {
+        "test_id": "tests/components/go2rtc/test_docker_version.py::test_docker_version_matches_recommended",
+        "introduced_in": "ba5472da90d7f3ffc55ac0662d55517997e24fdd",
+        "introduction_date": "2025-11-24T12:52:58+01:00",
+        "commits_since_introduction": 2469,
+        "commit_sample": [
+          {
+            "sha": "e20b88a54f016e0f3a9b01dd24a58f71a5cfbe4a",
+            "committed_datetime": "2025-11-24T12:32:55+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "ba5472da90d7f3ffc55ac0662d55517997e24fdd",
+            "committed_datetime": "2025-11-24T12:52:58+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "56515ad7b5a0fea1d43bcf447378072ac9c261d2",
+            "committed_datetime": "2025-12-02T05:03:53+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "c0aa35ff6d25c0ff2b594549269b23f50beaf715",
+            "committed_datetime": "2025-12-10T07:27:42+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "9ba252d8e31649b520e9918b09f6b0c048f3e7e8",
+            "committed_datetime": "2025-12-16T12:09:35+00:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "2d6ae8f907892e9a4888746e230efb19cfc01cfa",
+            "committed_datetime": "2025-12-24T21:24:36-08:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "35f4464d4a535fc87bda445cbe0b5f876149dd08",
+            "committed_datetime": "2026-01-06T00:24:20+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "644a40674d51f42171d2f20af58616c712763acc",
+            "committed_datetime": "2026-01-16T09:21:19+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "68b4ad722d83ac42c7a659565240c60571c0e7e8",
+            "committed_datetime": "2026-01-27T07:53:31+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "bd4fa0d5c249982f50169ade055f36f9d7f63f93",
+            "committed_datetime": "2026-02-02T19:02:09+01:00",
+            "requires_python": ">=3.14.2"
+          },
+          {
+            "sha": "ebd1f1b00f931095039973b40fe60355575cc781",
+            "committed_datetime": "2026-02-11T11:27:33+01:00",
+            "requires_python": ">=3.14.2"
+          }
+        ]
+      }
+    ],
+    "pr_number": 163802,
+    "pr_title": "Fix grammar of `amcrest.ptz_control` action description",
+    "pr_created_at": "2026-02-22T17:42:22+00:00",
+    "merge_commit_sha": "959bafe78b21eec12a62ba01117c088bd22393c0",
+    "source_sha": "faa28aea96be02e999ebcd44b6d496983bf14343",
+    "target_sha": "383f9c203d6b0fc0ef0cfb0a9357eb9930758b28"
+  },
+  {
+    "run_id": 22280767827,
+    "run_attempt": 1,
+    "failed_tests": [
+      {
+        "test_id": "tests/pylint/test_enforce_type_hints.py::test_ignore_invalid_entity_properties",
+        "introduced_in": "1b8dd3368a50e4b1d8130cb2e673eaf4c6976df7",
+        "introduction_date": "2022-06-21T14:36:22+02:00",
+        "commits_since_introduction": 44195,
+        "commit_sample": [
+          {
+            "sha": "c674af3ba1b4a87682427003a86febc95f69c094",
+            "committed_datetime": "2022-06-21T10:22:06+02:00",
+            "requires_python": ">=3.9.0"
+          },
+          {
+            "sha": "1b8dd3368a50e4b1d8130cb2e673eaf4c6976df7",
+            "committed_datetime": "2022-06-21T14:36:22+02:00",
+            "requires_python": ">=3.9.0"
+          },
+          {
+            "sha": "2d206e7e3172c68a191fb9487ca1370eb7958b15",
+            "committed_datetime": "2022-12-12T16:00:30+01:00",
+            "requires_python": ">=3.9.0"
+          },
+          {
+            "sha": "ddf004d5c7903f1317b61154d079a9f42d92f44f",
+            "committed_datetime": "2023-06-13T21:37:30+02:00",
+            "requires_python": ">=3.10.0"
+          },
+          {
+            "sha": "4da77d2253e4e9cf5b581486fa934f285ae6ed81",
+            "committed_datetime": "2023-11-20T19:55:10+01:00",
+            "requires_python": ">=3.11.0"
+          },
+          {
+            "sha": "3a8494cb88c1df720f0a12403254d236baa460c0",
+            "committed_datetime": "2024-03-19T15:30:30+01:00",
+            "requires_python": ">=3.11.0"
+          },
+          {
+            "sha": "72f9d85bbebb9c45b157974391728b12c6efb3ad",
+            "committed_datetime": "2024-07-30T14:57:43+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "0b7447c562b23dad963321612f29eb9594d0df67",
+            "committed_datetime": "2024-12-08T23:36:55+01:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "1e104ba40b100f978c4486f30d1f57b693cf89e6",
+            "committed_datetime": "2025-04-07T09:40:06+02:00",
+            "requires_python": ">=3.13.0"
+          },
+          {
+            "sha": "9f8f7d2fde9b0ca5e5e961a3ebaa9bc5b48f5090",
+            "committed_datetime": "2025-09-12T11:52:29+02:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "ebd1f1b00f931095039973b40fe60355575cc781",
+            "committed_datetime": "2026-02-11T11:27:33+01:00",
+            "requires_python": ">=3.14.2"
+          }
+        ]
+      }
+    ],
+    "pr_number": 163796,
+    "pr_title": "Mark lock entity type hints as mandatory",
+    "pr_created_at": "2026-02-22T16:08:57+00:00",
+    "merge_commit_sha": "a5e89f90bb056c3837b73852a5653bba6a3bf6f8",
+    "source_sha": "df9b80391426bd23f462a5215114844c043bb676",
+    "target_sha": "11edd214a18be8526f5f3ea99b04b277d64a5465"
+  },
+  {
+    "run_id": 22274852987,
+    "run_attempt": 1,
+    "failed_tests": [
+      {
+        "test_id": "tests/components/enphase_envoy/test_diagnostics.py::test_entry_diagnostics_with_interface_information",
+        "introduced_in": "d1236a53b8e34e54f57c206232361574fba97360",
+        "introduction_date": "2025-04-28T11:20:11+02:00",
+        "commits_since_introduction": 9124,
+        "commit_sample": [
+          {
+            "sha": "84f07ee992042a967b7949cf327d560e21f480b2",
+            "committed_datetime": "2025-04-28T10:38:49+02:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "d1236a53b8e34e54f57c206232361574fba97360",
+            "committed_datetime": "2025-04-28T11:20:11+02:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "a707cbc51b996a19474a0d965ba2209bea84d642",
+            "committed_datetime": "2025-05-24T21:26:49+02:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "8bacab4f9c1a6ebdc2c7a5a7563ca840d5d9b21a",
+            "committed_datetime": "2025-06-29T07:22:04+02:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "daea76c2f1e45705bc3a6992240917501b0751ff",
+            "committed_datetime": "2025-07-30T16:51:10+02:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "e7cb0173b0c3639baaae96673096e96be9b4b2d1",
+            "committed_datetime": "2025-09-08T13:41:38-05:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "5622103eb1eea8c19c7093262b8fe3be811dbf88",
+            "committed_datetime": "2025-10-07T08:44:34+02:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "6a07b468a3b42f8ef9ffb5dc2f4bbb11b1710292",
+            "committed_datetime": "2025-11-07T13:21:33+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "a47255c233960fe0d03d8aa88f20ad1f66f58893",
+            "committed_datetime": "2025-12-05T08:27:31+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "1ac2280266e9acf3841721d2aa735372138761dd",
+            "committed_datetime": "2026-01-08T23:11:42+00:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "ebd1f1b00f931095039973b40fe60355575cc781",
+            "committed_datetime": "2026-02-11T11:27:33+01:00",
+            "requires_python": ">=3.14.2"
+          }
+        ]
+      }
+    ],
+    "pr_number": 163751,
+    "pr_title": "Add integration_type device to volumio",
+    "pr_created_at": "2026-02-21T21:06:38+00:00",
+    "merge_commit_sha": "16f4f5d54f805beedfd621f8dbe750707ee0377d",
+    "source_sha": "d2e266ef79e0216e06bdf1ca73dc088daf8adfe7",
+    "target_sha": "0e439583a6c69aa30b49d518503fcc151b8ff78e"
+  },
+  {
+    "run_id": 22272113880,
+    "run_attempt": 2,
+    "failed_tests": [
+      {
+        "test_id": "tests/components/roborock/test_vacuum.py::test_commands",
+        "introduced_in": "1ae7610622563c7e597d7cde580cee2e61b45bed",
+        "introduction_date": "2023-04-24T16:46:00+02:00",
+        "commits_since_introduction": 35451,
+        "commit_sample": [
+          {
+            "sha": "88f0e4000b86819937750d41f36701ddcaf63cd2",
+            "committed_datetime": "2023-04-24T16:09:36+02:00",
+            "requires_python": ">=3.10.0"
+          },
+          {
+            "sha": "1ae7610622563c7e597d7cde580cee2e61b45bed",
+            "committed_datetime": "2023-04-24T16:46:00+02:00",
+            "requires_python": ">=3.10.0"
+          },
+          {
+            "sha": "446ca2e9ad125a31e85c11097c8c9053a5a1f54d",
+            "committed_datetime": "2023-09-10T12:16:59+02:00",
+            "requires_python": ">=3.11.0"
+          },
+          {
+            "sha": "16f6854f64d544b67e0dd8fa2648981f5b6b8941",
+            "committed_datetime": "2024-01-19T22:09:39-05:00",
+            "requires_python": ">=3.11.0"
+          },
+          {
+            "sha": "81036967f04b47e75cf861aa821515e2de6e812f",
+            "committed_datetime": "2024-04-16T22:35:55+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "d586e7df33e6387c4e384c1fe1f3358678994eb0",
+            "committed_datetime": "2024-07-29T11:59:31+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "0304588bb8ad3751a8a478a75d101b0dd075f7a8",
+            "committed_datetime": "2024-11-09T11:19:36+01:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "d46e29d7a9ff5bfeaddf81a6e99a464477eeb575",
+            "committed_datetime": "2025-02-11T11:36:18+01:00",
+            "requires_python": ">=3.13.0"
+          },
+          {
+            "sha": "0434eea3ab6f5fce696f3a1b025ad931070b5ed0",
+            "committed_datetime": "2025-06-01T02:05:19+02:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "c7321a337e78978f99dbdd9cbb33d9367973742d",
+            "committed_datetime": "2025-10-10T16:23:07+02:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "ebd1f1b00f931095039973b40fe60355575cc781",
+            "committed_datetime": "2026-02-11T11:27:33+01:00",
+            "requires_python": ">=3.14.2"
+          }
+        ]
+      },
+      {
+        "test_id": "tests/components/roborock/test_select.py::test_update_success",
+        "introduced_in": "b5bf88215c271077c3b3ee1faa996ee60f7c5c6c",
+        "introduction_date": "2023-04-24T22:53:45+02:00",
+        "commits_since_introduction": 35439,
+        "commit_sample": [
+          {
+            "sha": "e3a110f04f2c9369f30bf72d7a3fbd16ba50c8fa",
+            "committed_datetime": "2023-04-24T22:13:30+02:00",
+            "requires_python": ">=3.10.0"
+          },
+          {
+            "sha": "b5bf88215c271077c3b3ee1faa996ee60f7c5c6c",
+            "committed_datetime": "2023-04-24T22:53:45+02:00",
+            "requires_python": ">=3.10.0"
+          },
+          {
+            "sha": "05635c913f12c7d9b19d93fdf912c69479e56ba7",
+            "committed_datetime": "2023-09-10T17:10:45+02:00",
+            "requires_python": ">=3.11.0"
+          },
+          {
+            "sha": "206e6dfd6207b696b5d93bdc8c13212a653c2546",
+            "committed_datetime": "2024-01-20T11:05:16+01:00",
+            "requires_python": ">=3.11.0"
+          },
+          {
+            "sha": "ba4731ecb419a17a4d6742d27ea172e38b7686d0",
+            "committed_datetime": "2024-04-17T11:54:53+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "86bfc7ada86f8501fee0650bfcc133199f913883",
+            "committed_datetime": "2024-07-29T12:52:37+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "4adffdd1a607c386ab02ce64f610a7aa7a5212c7",
+            "committed_datetime": "2024-11-09T13:01:59+01:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "89f157592da37c28c42c2b7f642331da4cc3b5e8",
+            "committed_datetime": "2025-02-11T13:15:11+02:00",
+            "requires_python": ">=3.13.0"
+          },
+          {
+            "sha": "ed9fd2c643de1f7b5a8276c63946c2fd58146247",
+            "committed_datetime": "2025-06-01T06:31:37-07:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "217894ee8ba2a1019f4c55634d7bc9ff809283bb",
+            "committed_datetime": "2025-10-10T16:24:14+02:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "ebd1f1b00f931095039973b40fe60355575cc781",
+            "committed_datetime": "2026-02-11T11:27:33+01:00",
+            "requires_python": ">=3.14.2"
+          }
+        ]
+      },
+      {
+        "test_id": "tests/components/roborock/test_select.py::test_update_success",
+        "introduced_in": "b5bf88215c271077c3b3ee1faa996ee60f7c5c6c",
+        "introduction_date": "2023-04-24T22:53:45+02:00",
+        "commits_since_introduction": 35439,
+        "commit_sample": [
+          {
+            "sha": "e3a110f04f2c9369f30bf72d7a3fbd16ba50c8fa",
+            "committed_datetime": "2023-04-24T22:13:30+02:00",
+            "requires_python": ">=3.10.0"
+          },
+          {
+            "sha": "b5bf88215c271077c3b3ee1faa996ee60f7c5c6c",
+            "committed_datetime": "2023-04-24T22:53:45+02:00",
+            "requires_python": ">=3.10.0"
+          },
+          {
+            "sha": "05635c913f12c7d9b19d93fdf912c69479e56ba7",
+            "committed_datetime": "2023-09-10T17:10:45+02:00",
+            "requires_python": ">=3.11.0"
+          },
+          {
+            "sha": "206e6dfd6207b696b5d93bdc8c13212a653c2546",
+            "committed_datetime": "2024-01-20T11:05:16+01:00",
+            "requires_python": ">=3.11.0"
+          },
+          {
+            "sha": "ba4731ecb419a17a4d6742d27ea172e38b7686d0",
+            "committed_datetime": "2024-04-17T11:54:53+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "86bfc7ada86f8501fee0650bfcc133199f913883",
+            "committed_datetime": "2024-07-29T12:52:37+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "4adffdd1a607c386ab02ce64f610a7aa7a5212c7",
+            "committed_datetime": "2024-11-09T13:01:59+01:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "89f157592da37c28c42c2b7f642331da4cc3b5e8",
+            "committed_datetime": "2025-02-11T13:15:11+02:00",
+            "requires_python": ">=3.13.0"
+          },
+          {
+            "sha": "ed9fd2c643de1f7b5a8276c63946c2fd58146247",
+            "committed_datetime": "2025-06-01T06:31:37-07:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "217894ee8ba2a1019f4c55634d7bc9ff809283bb",
+            "committed_datetime": "2025-10-10T16:24:14+02:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "ebd1f1b00f931095039973b40fe60355575cc781",
+            "committed_datetime": "2026-02-11T11:27:33+01:00",
+            "requires_python": ">=3.14.2"
+          }
+        ]
+      },
+      {
+        "test_id": "tests/components/roborock/test_select.py::test_update_failure",
+        "introduced_in": "b5bf88215c271077c3b3ee1faa996ee60f7c5c6c",
+        "introduction_date": "2023-04-24T22:53:45+02:00",
+        "commits_since_introduction": 35439,
+        "commit_sample": [
+          {
+            "sha": "e3a110f04f2c9369f30bf72d7a3fbd16ba50c8fa",
+            "committed_datetime": "2023-04-24T22:13:30+02:00",
+            "requires_python": ">=3.10.0"
+          },
+          {
+            "sha": "b5bf88215c271077c3b3ee1faa996ee60f7c5c6c",
+            "committed_datetime": "2023-04-24T22:53:45+02:00",
+            "requires_python": ">=3.10.0"
+          },
+          {
+            "sha": "05635c913f12c7d9b19d93fdf912c69479e56ba7",
+            "committed_datetime": "2023-09-10T17:10:45+02:00",
+            "requires_python": ">=3.11.0"
+          },
+          {
+            "sha": "206e6dfd6207b696b5d93bdc8c13212a653c2546",
+            "committed_datetime": "2024-01-20T11:05:16+01:00",
+            "requires_python": ">=3.11.0"
+          },
+          {
+            "sha": "ba4731ecb419a17a4d6742d27ea172e38b7686d0",
+            "committed_datetime": "2024-04-17T11:54:53+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "86bfc7ada86f8501fee0650bfcc133199f913883",
+            "committed_datetime": "2024-07-29T12:52:37+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "4adffdd1a607c386ab02ce64f610a7aa7a5212c7",
+            "committed_datetime": "2024-11-09T13:01:59+01:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "89f157592da37c28c42c2b7f642331da4cc3b5e8",
+            "committed_datetime": "2025-02-11T13:15:11+02:00",
+            "requires_python": ">=3.13.0"
+          },
+          {
+            "sha": "ed9fd2c643de1f7b5a8276c63946c2fd58146247",
+            "committed_datetime": "2025-06-01T06:31:37-07:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "217894ee8ba2a1019f4c55634d7bc9ff809283bb",
+            "committed_datetime": "2025-10-10T16:24:14+02:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "ebd1f1b00f931095039973b40fe60355575cc781",
+            "committed_datetime": "2026-02-11T11:27:33+01:00",
+            "requires_python": ">=3.14.2"
+          }
+        ]
+      }
+    ],
+    "pr_number": 163765,
+    "pr_title": "Bump python-robroock to 4.17.1",
+    "pr_created_at": "2026-02-22T06:19:38+00:00",
+    "merge_commit_sha": "2aeb410b42c37b531ea9e4adda47eec3fdc518e5",
+    "source_sha": "42cae6311e359026623d4dc133755a30f1671e7f",
+    "target_sha": "429249f3f062ae2b48c4664cdddd206180229989"
+  },
+  {
+    "run_id": 22262590817,
+    "run_attempt": 1,
+    "failed_tests": [
+      {
+        "test_id": "tests/components/egauge/test_sensor.py::test_sensors",
+        "introduced_in": "2617c4a4539c57121dd61c9dc6d7ab152d490c02",
+        "introduction_date": "2025-12-08T17:33:11+01:00",
+        "commits_since_introduction": 1959,
+        "commit_sample": [
+          {
+            "sha": "0e6d9ecbdcec64e508b6ab17e93cbc908f9bc426",
+            "committed_datetime": "2025-12-08T16:45:23+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "2617c4a4539c57121dd61c9dc6d7ab152d490c02",
+            "committed_datetime": "2025-12-08T17:33:11+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "7a2592173be660f1c3baf3cc594bb154914191b6",
+            "committed_datetime": "2025-12-15T09:57:53+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "173db170af78de56ea2c2d2791a59188b99f88a1",
+            "committed_datetime": "2025-12-18T19:46:07+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "1e9af4fbe00563ee5bf2cc2719f31ea0e27f9e1a",
+            "committed_datetime": "2025-12-28T16:41:56+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "2bc939710385f8cdfd0009500ae217bcb587fb8a",
+            "committed_datetime": "2026-01-06T12:36:49+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "ac889feb756d83aace78b056cfd7fe99f0dfcbe7",
+            "committed_datetime": "2026-01-14T11:49:56+00:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "0843cd761fe6f8627c2903a7638c0ce97020fac2",
+            "committed_datetime": "2026-01-22T22:57:14+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "1221c5bcad1ac65deeadda4a3b92db9d323905d8",
+            "committed_datetime": "2026-01-28T14:59:38+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "51b20fb5db3688180e8351d576816a800671e311",
+            "committed_datetime": "2026-02-04T10:16:47+01:00",
+            "requires_python": ">=3.14.2"
+          },
+          {
+            "sha": "ebd1f1b00f931095039973b40fe60355575cc781",
+            "committed_datetime": "2026-02-11T11:27:33+01:00",
+            "requires_python": ">=3.14.2"
+          }
+        ]
+      }
+    ],
+    "pr_number": 163728,
+    "pr_title": "Add support for current sensors to egauge integration",
+    "pr_created_at": "2026-02-21T19:02:04+00:00",
+    "merge_commit_sha": "29630fc1de22e4e25020ee603341ee2ac39f7695",
+    "source_sha": "783bb81e01982402e8ad139e8c1cde544133dce2",
+    "target_sha": "0e439583a6c69aa30b49d518503fcc151b8ff78e"
+  },
+  {
+    "run_id": 22252684588,
+    "run_attempt": 1,
+    "failed_tests": [
+      {
+        "test_id": "tests/components/vicare/test_sensor.py::test_all_entities",
+        "introduced_in": "52c0a091079b84cf3d966f099074fc8e4d875262",
+        "introduction_date": "2024-08-21T14:42:58+02:00",
+        "commits_since_introduction": 18918,
+        "commit_sample": [
+          {
+            "sha": "8d97fafb2dd917ba15ba072267ca0a00052b4d76",
+            "committed_datetime": "2024-08-21T14:03:40+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "52c0a091079b84cf3d966f099074fc8e4d875262",
+            "committed_datetime": "2024-08-21T14:42:58+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "d9f4f424fdd992be5218e1c58e883d464d0f0136",
+            "committed_datetime": "2024-10-11T12:02:11+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "6cf10cd0b221dc92a41dbdefd9e2580a1b856873",
+            "committed_datetime": "2024-12-09T11:25:18+01:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "fa6df1cc2525241dd6672eee43983d5ccdac1531",
+            "committed_datetime": "2025-01-29T17:15:54+01:00",
+            "requires_python": ">=3.13.0"
+          },
+          {
+            "sha": "ec4de0dccee2c6d90275483f7dea9f964cf27268",
+            "committed_datetime": "2025-03-22T18:14:42+01:00",
+            "requires_python": ">=3.13.0"
+          },
+          {
+            "sha": "4c40ec4948956244c7fe839a80f44e20707485ee",
+            "committed_datetime": "2025-05-17T13:06:02+02:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "70e03cdd4ebd25c9cda6d10ab000e5df160bcb27",
+            "committed_datetime": "2025-07-23T15:05:19+02:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "66ac9078aa47cbc45345887a962177120710498e",
+            "committed_datetime": "2025-10-03T20:55:38+02:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "31a0478717f113657ed79dd369ae2178fed09346",
+            "committed_datetime": "2025-12-03T10:56:56+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "ebd1f1b00f931095039973b40fe60355575cc781",
+            "committed_datetime": "2026-02-11T11:27:33+01:00",
+            "requires_python": ">=3.14.2"
+          }
+        ]
+      }
+    ],
+    "pr_number": 163686,
+    "pr_title": "Bump PyViCare to 2.58.0",
+    "pr_created_at": "2026-02-20T21:54:32+00:00",
+    "merge_commit_sha": "7f9cd4325f1d3ab9a373924152c454874a909a82",
+    "source_sha": "54c4ef6b48287a996cf464ca28adea06d5da3a6b",
+    "target_sha": "a791797a6f891ccafb72b0c3815a99ad1ddb29d0"
+  },
+  {
+    "run_id": 22242678200,
+    "run_attempt": 1,
+    "failed_tests": [
+      {
+        "test_id": "tests/components/vicare/test_sensor.py::test_all_entities",
+        "introduced_in": "52c0a091079b84cf3d966f099074fc8e4d875262",
+        "introduction_date": "2024-08-21T14:42:58+02:00",
+        "commits_since_introduction": 18918,
+        "commit_sample": [
+          {
+            "sha": "8d97fafb2dd917ba15ba072267ca0a00052b4d76",
+            "committed_datetime": "2024-08-21T14:03:40+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "52c0a091079b84cf3d966f099074fc8e4d875262",
+            "committed_datetime": "2024-08-21T14:42:58+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "d9f4f424fdd992be5218e1c58e883d464d0f0136",
+            "committed_datetime": "2024-10-11T12:02:11+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "6cf10cd0b221dc92a41dbdefd9e2580a1b856873",
+            "committed_datetime": "2024-12-09T11:25:18+01:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "fa6df1cc2525241dd6672eee43983d5ccdac1531",
+            "committed_datetime": "2025-01-29T17:15:54+01:00",
+            "requires_python": ">=3.13.0"
+          },
+          {
+            "sha": "ec4de0dccee2c6d90275483f7dea9f964cf27268",
+            "committed_datetime": "2025-03-22T18:14:42+01:00",
+            "requires_python": ">=3.13.0"
+          },
+          {
+            "sha": "4c40ec4948956244c7fe839a80f44e20707485ee",
+            "committed_datetime": "2025-05-17T13:06:02+02:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "70e03cdd4ebd25c9cda6d10ab000e5df160bcb27",
+            "committed_datetime": "2025-07-23T15:05:19+02:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "66ac9078aa47cbc45345887a962177120710498e",
+            "committed_datetime": "2025-10-03T20:55:38+02:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "31a0478717f113657ed79dd369ae2178fed09346",
+            "committed_datetime": "2025-12-03T10:56:56+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "ebd1f1b00f931095039973b40fe60355575cc781",
+            "committed_datetime": "2026-02-11T11:27:33+01:00",
+            "requires_python": ">=3.14.2"
+          }
+        ]
+      }
+    ],
+    "pr_number": 163686,
+    "pr_title": "Bump PyViCare to 2.58.0",
+    "pr_created_at": "2026-02-20T21:54:32+00:00",
+    "merge_commit_sha": "291d210a07b07a5c01dc341bc1198669eb0ea006",
+    "source_sha": "54c4ef6b48287a996cf464ca28adea06d5da3a6b",
+    "target_sha": "a791797a6f891ccafb72b0c3815a99ad1ddb29d0"
+  },
+  {
+    "run_id": 22242506278,
+    "run_attempt": 1,
+    "failed_tests": [
+      {
+        "test_id": "tests/components/telegram_bot/test_telegram_bot.py::test_send_message",
+        "introduced_in": "9add251b0a7e7b8362e8584017b25e002b0536db",
+        "introduction_date": "2024-05-14T15:48:59+02:00",
+        "commits_since_introduction": 22783,
+        "commit_sample": [
+          {
+            "sha": "121966245bb75dd6dfbb46b89339c7f849d63c62",
+            "committed_datetime": "2024-05-14T15:42:41+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "9add251b0a7e7b8362e8584017b25e002b0536db",
+            "committed_datetime": "2024-05-14T15:48:59+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "33df8572839ebb95aaa4b14d376ef7a5a7b6d402",
+            "committed_datetime": "2024-07-10T11:11:54+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "a9b215357fd399ca02c9cfba4d81c29b008b0005",
+            "committed_datetime": "2024-09-23T08:59:38+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "91e4939bf04501410a6cf5e71ef6f6ed11333544",
+            "committed_datetime": "2024-11-26T10:00:34+01:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "7b1b2297185b98902e458c1c392151c14ddcbee0",
+            "committed_datetime": "2025-01-29T10:00:45+01:00",
+            "requires_python": ">=3.13.0"
+          },
+          {
+            "sha": "d4970f81aa3c956ec64e862c94fb7e676aab4673",
+            "committed_datetime": "2025-03-29T22:30:06-10:00",
+            "requires_python": ">=3.13.0"
+          },
+          {
+            "sha": "9d1e60cf7e12935ca8cb62c5875fada275c4900f",
+            "committed_datetime": "2025-06-12T12:17:27+02:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "d990c2bee2f3e66f699bc33e307b91302f9d956b",
+            "committed_datetime": "2025-09-08T14:51:17-05:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "b27b357b91d5ffd46f5891fab3a962eea375ac50",
+            "committed_datetime": "2025-11-22T20:23:29+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "ebd1f1b00f931095039973b40fe60355575cc781",
+            "committed_datetime": "2026-02-11T11:27:33+01:00",
+            "requires_python": ">=3.14.2"
+          }
+        ]
+      },
+      {
+        "test_id": "tests/components/telegram_bot/test_telegram_bot.py::test_send_message",
+        "introduced_in": "9add251b0a7e7b8362e8584017b25e002b0536db",
+        "introduction_date": "2024-05-14T15:48:59+02:00",
+        "commits_since_introduction": 22783,
+        "commit_sample": [
+          {
+            "sha": "121966245bb75dd6dfbb46b89339c7f849d63c62",
+            "committed_datetime": "2024-05-14T15:42:41+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "9add251b0a7e7b8362e8584017b25e002b0536db",
+            "committed_datetime": "2024-05-14T15:48:59+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "33df8572839ebb95aaa4b14d376ef7a5a7b6d402",
+            "committed_datetime": "2024-07-10T11:11:54+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "a9b215357fd399ca02c9cfba4d81c29b008b0005",
+            "committed_datetime": "2024-09-23T08:59:38+02:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "91e4939bf04501410a6cf5e71ef6f6ed11333544",
+            "committed_datetime": "2024-11-26T10:00:34+01:00",
+            "requires_python": ">=3.12.0"
+          },
+          {
+            "sha": "7b1b2297185b98902e458c1c392151c14ddcbee0",
+            "committed_datetime": "2025-01-29T10:00:45+01:00",
+            "requires_python": ">=3.13.0"
+          },
+          {
+            "sha": "d4970f81aa3c956ec64e862c94fb7e676aab4673",
+            "committed_datetime": "2025-03-29T22:30:06-10:00",
+            "requires_python": ">=3.13.0"
+          },
+          {
+            "sha": "9d1e60cf7e12935ca8cb62c5875fada275c4900f",
+            "committed_datetime": "2025-06-12T12:17:27+02:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "d990c2bee2f3e66f699bc33e307b91302f9d956b",
+            "committed_datetime": "2025-09-08T14:51:17-05:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "b27b357b91d5ffd46f5891fab3a962eea375ac50",
+            "committed_datetime": "2025-11-22T20:23:29+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "ebd1f1b00f931095039973b40fe60355575cc781",
+            "committed_datetime": "2026-02-11T11:27:33+01:00",
+            "requires_python": ">=3.14.2"
+          }
+        ]
+      }
+    ],
+    "pr_number": 163617,
+    "pr_title": "Mark entity icon type hints as mandatory",
+    "pr_created_at": "2026-02-20T10:56:09+00:00",
+    "merge_commit_sha": "a791797a6f891ccafb72b0c3815a99ad1ddb29d0",
+    "source_sha": "98251bc9022ecc4f575b89a2c33359d8fe152dd0",
+    "target_sha": "aa2bb44f0ed1c7e87d3a5b5050a688ec18a76c02"
+  },
+  {
+    "run_id": 22240453953,
+    "run_attempt": 1,
+    "failed_tests": [
+      {
+        "test_id": "tests/components/openrgb/test_select.py::test_current_option_cleared_when_colors_change",
+        "introduced_in": "585c2dce1607e796d17cd7cff60d4a9e3911550d",
+        "introduction_date": "2025-12-29T17:42:20+01:00",
+        "commits_since_introduction": 1222,
+        "commit_sample": [
+          {
+            "sha": "08d25d388ffc67be3f33610ccc6cd50133116419",
+            "committed_datetime": "2025-12-29T17:37:01+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "585c2dce1607e796d17cd7cff60d4a9e3911550d",
+            "committed_datetime": "2025-12-29T17:42:20+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "badebe0c7f02eef5b60e61725a40fb1f9fcf6246",
+            "committed_datetime": "2026-01-06T16:09:13+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "a434760a8047aa02bb9fa45706a29c11f96a0883",
+            "committed_datetime": "2026-01-12T15:43:28+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "49c42b9ad07cb2e1e8a5a453cc6c29930e5d15b0",
+            "committed_datetime": "2026-01-16T12:51:42+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "b700a27c8fb0c4cd080725bde7a432597fb339c9",
+            "committed_datetime": "2026-01-21T21:56:51+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "5ec6a40cebebf42e024ac8c7512a0d85ad1c880f",
+            "committed_datetime": "2026-01-27T08:23:55+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "ad4fda7bb44f3eac46b18f19c78359364e2b4aab",
+            "committed_datetime": "2026-01-28T20:13:04+01:00",
+            "requires_python": ">=3.13.2"
+          },
+          {
+            "sha": "fc60b16d65a7854b26dc50853beb2803e8910a3f",
+            "committed_datetime": "2026-02-02T19:49:26+01:00",
+            "requires_python": ">=3.14.2"
+          },
+          {
+            "sha": "5c980e8d972063109d7dd308b9b7fb206e4523a2",
+            "committed_datetime": "2026-02-06T11:50:47+01:00",
+            "requires_python": ">=3.14.2"
+          },
+          {
+            "sha": "ebd1f1b00f931095039973b40fe60355575cc781",
+            "committed_datetime": "2026-02-11T11:27:33+01:00",
+            "requires_python": ">=3.14.2"
+          }
+        ]
+      }
+    ],
+    "pr_number": 163683,
+    "pr_title": "2026.2.3",
+    "pr_created_at": "2026-02-20T19:43:02+00:00",
+    "merge_commit_sha": "9c640fe0fa008d6e80aa4cc88c9c1734605fb3e0",
+    "source_sha": "62145e5f9e2060f591690f44811fb16cc38a6d69",
+    "target_sha": "3e6bc29a6a3e24ae687e8705cad8d9e82a034e79"
+  }
+]
