@@ -210,3 +210,6 @@ __marimo__/
 !home_assistant_flakes_dev.json
 
 *.csv
+*.tex
+
+*.zip

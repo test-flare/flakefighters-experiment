@@ -67,7 +67,7 @@ def main():
         # [run_id] = list(set(run_id["run_id"]))
         datum = {
             # "run_id": run_id,
-            "test": Path(file).parts[-2],
+            "test_id": Path(file).parts[-2],
             "source_sha": log["source_sha"],
             "target_sha": log["target_sha"],
             "confirmed": log["flakiness"]["confirmed"],
@@ -76,8 +76,44 @@ def main():
         } | get_flakefighter_data(file)
         data.append(datum)
 
+    flakefighters = ["CoverageIndependence", "DiffCov", "TracebackMatching", "CosineSimilarity"]
     data = pd.DataFrame(data)
+    data["Overall"] = data[flakefighters].any(axis=1)
+
     data.to_csv("results.csv")
+
+    eval_table = []
+
+    for flakefighter in flakefighters + ["Overall"]:
+        true_positives = (data["confirmed"] & data[flakefighter]).sum()
+        false_positives = (data["confirmed"] & (~data[flakefighter].astype("boolean"))).sum()
+        true_negatives = ((~data["confirmed"]) & (~data[flakefighter].astype("boolean"))).sum()
+        # false_negatives = (~data["confirmed"]) and (data[flakefighter])
+
+        sensitivity = true_positives / (true_positives + false_positives)
+        specificity = true_negatives / (true_negatives + false_positives)
+        bcr = (sensitivity + specificity) / 2
+        eval_table.append(
+            {"Flakefighter": flakefighter, "Sensitivity": sensitivity, "Specificity": specificity, "BCR": bcr}
+        )
+
+    eval_table = pd.DataFrame(eval_table).round(3)
+    print(eval_table)
+    eval_table.to_latex("results.tex", index=False)
+
+    print()
+    print(len(data), "tests in total")
+    for source in [True, False]:
+        if source:
+            pr_code = data.loc[pd.isnull(data["source_sha"])]
+        else:
+            pr_code = data.loc[~pd.isnull(data["source_sha"])]
+        all_failed = len(pr_code.query("successes == 0"))
+        all_passed = len(pr_code.query("failures == 0"))
+        flaky = len(pr_code.query("(successes > 0) & (failures > 0)"))
+        print(
+            "PR", "source" if source else "target", all_passed, "only passed", all_failed, "only failed", flaky, "flaky"
+        )
 
 
 if __name__ == "__main__":

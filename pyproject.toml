@@ -11,7 +11,8 @@ dependencies = [
     "pytest>=9.0.2",
     "pytest-flakefighters>=0.4.1",
     "requests>=2.32.5",
-    "docker==7.1.0"
+    "docker==7.1.0",
+    "jinja2>=3.1.6",
 ]
 dynamic = ["version"]
 
