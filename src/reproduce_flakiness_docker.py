@@ -1,6 +1,10 @@
+"""
+This module implements the main entrypoint for the experiments.
+It takes in a JSON file representing the failed runs and attempts to reproduce the flakiness.
+"""
+
 import json
 import os
-import re
 import sys
 from multiprocessing import Pool
 import docker
@@ -10,35 +14,24 @@ REPO_PATH = "./core"
 client = docker.from_env()
 
 
-def requires_python(constraint):
-    match = re.search(r">=(3\.\d+)", constraint)
-    if match:
-        return match.group(1)
-    return "3.10"
-
-
-def reproduce_flakiness(args):
+def reproduce_flakiness(test: dict):
+    """
+    Given a failing test, try to reproduce the flaky behaviour and identify it with flakefighters.
+    :param test: Dictionary representing the test to reproduce.
+    """
 
     command = (
-        f"-t {args['target_sha']} "
-        f"-T {args['test_id']} "
-        f"-o /home/flakehunter/outputs/{args['test_id']}/{args['target_sha']}.json "
-        f"-r 100 "
+        f"-t {test['target_sha']} "
+        f"-T {test['test_id']} "
+        f"-o /home/flakehunter/outputs/{test['test_id']}/{test['target_sha']}.json "
+        f"-r 1000 "
         f"-R {REPO_PATH}"
     )
-    if "source_sha" in args:
-        command += f" -s {args['source_sha']}"
-
-    # logs = client.containers.run(
-    #     image=f"flakehunter:{args['python_version']}",
-    #     command=command,
-    #     volumes={os.path.join(os.getcwd(), "outputs"): {"bind": "/home/flakehunter/outputs", "mode": "rw"}},
-    #     auto_remove=True,  # Critical for cleanup
-    #     detach=False,  # Keep it in the foreground so we can catch signals
-    # )
+    if "source_sha" in test:
+        command += f" -s {test['source_sha']}"
 
     container = client.containers.create(
-        f"flakehunter:{args['python_version']}",
+        f"flakehunter:{test['python_version']}",
         command,
         volumes={os.path.join(os.getcwd(), "outputs"): {"bind": "/home/flakehunter/outputs", "mode": "rw"}},
     )
@@ -56,6 +49,9 @@ def reproduce_flakiness(args):
 
 
 def main():
+    """
+    Main entrypoint for the experiments.
+    """
     if not os.path.exists("outputs"):
         os.mkdir("outputs")
 
@@ -83,15 +79,6 @@ def main():
                     },
                 ]
             )
-            # for commit in test["commit_sample"]:
-            #     python_version = requires_python(commit["requires_python"])
-            #     args.append(
-            #         {
-            #             "target_sha": commit["sha"],
-            #             "test_id": test["test_id"],
-            #             "python_version": python_version,
-            #         }
-            #     )
 
     hashes = None
     if len(sys.argv) > 1:
@@ -106,15 +93,11 @@ def main():
     )
 
     print("ARGS", args)
-    # for arg in args:
-    #     reproduce_flakiness(arg)
-    #     print("DONE 1")
     with Pool() as pool:
         try:
             pool.map(reproduce_flakiness, args)
         except KeyboardInterrupt:
             pool.terminate()
-            # Use the SDK to find and kill all containers with your session label
             for container in client.containers.list():
                 print(f"Killing {container}")
                 container.kill()
