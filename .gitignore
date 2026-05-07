@@ -209,5 +209,4 @@ __marimo__/
 *.json
 !home_assistant_flakes_dev.json
 
-core/
 *.csv
