@@ -6,6 +6,10 @@ Replication package for our FlakeFighters tool paper.
 ```
 git clone https://github.com/test-flare/flakefighters-experiment.git --recursive
 ```
+2. Ensure that the `home-assistant/core` repository is in this directory. If not, clone it.
+```
+git clone https://github.com/home-assistant/core.git 
+```
 2. Create a new virtual environment and install the dependencies:
 ```
 virtualenv -p python3.11 --download venv
@@ -21,6 +25,11 @@ bash build_docker.sh
 python src/reproduce_flakiness_docker.py
 ```
 This will produce a folder called `outputs` which will store the run data for each test in a `.db` file and summary information in a `.json` file.
+> [!NOTE]
+> This will take a long time to run and require a lot of memory.
+> Our results are already in the "ouputs" directory.
+> Unless you explicitly want to confirm the flaky tests, we recommend you skip this step and process the results directly.
+
 5. Process the results:
 ```
 python src/results_processing.json
