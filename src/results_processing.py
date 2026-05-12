@@ -69,22 +69,29 @@ def main():
     flakefighters = ["CoverageIndependence", "DiffCov", "TracebackMatching", "CosineSimilarity"]
     data = pd.DataFrame(data)
     data["Overall"] = data[flakefighters].any(axis=1)
-
     data.to_csv("results.csv")
+    data = data.loc[~pd.isnull(data["source_sha"])]
 
     eval_table = []
 
     for flakefighter in flakefighters + ["Overall"]:
-        true_positives = (data["confirmed"] & data[flakefighter]).sum()
-        false_positives = (data["confirmed"] & (~data[flakefighter].astype("boolean"))).sum()
+        true_positives = (data["confirmed"] & (data[flakefighter].astype("boolean"))).sum()
+        false_positives = (~data["confirmed"] & (data[flakefighter].astype("boolean"))).sum()
         true_negatives = ((~data["confirmed"]) & (~data[flakefighter].astype("boolean"))).sum()
-        # false_negatives = (~data["confirmed"]) and (data[flakefighter])
 
         sensitivity = true_positives / (true_positives + false_positives)
         specificity = true_negatives / (true_negatives + false_positives)
         bcr = (sensitivity + specificity) / 2
         eval_table.append(
-            {"Flakefighter": flakefighter, "Sensitivity": sensitivity, "Specificity": specificity, "BCR": bcr}
+            {
+                "Flakefighter": flakefighter,
+                "TP": true_positives,
+                "FP": false_positives,
+                "TN": true_negatives,
+                "Sensitivity": sensitivity,
+                "Specificity": specificity,
+                "BCR": bcr,
+            }
         )
 
     eval_table = pd.DataFrame(eval_table).round(3)
