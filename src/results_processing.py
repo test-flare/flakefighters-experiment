@@ -66,37 +66,42 @@ def main():
         } | get_flakefighter_data(file)
         data.append(datum)
 
-    flakefighters = ["CoverageIndependence", "DiffCov", "TracebackMatching", "CosineSimilarity"]
+    flakefighters = {
+        "CoverageIndependence": "Coverage Matching",
+        "DiffCov": "Differential Coverage",
+        "TracebackMatching": "Failure Log Matching",
+        "CosineSimilarity": "Cosine Similarity",
+    }
     data = pd.DataFrame(data)
-    data["Overall"] = data[flakefighters].any(axis=1)
-    data.to_csv("results.csv")
+    data["Combined"] = data[list(flakefighters)].any(axis=1)
     data = data.loc[~pd.isnull(data["source_sha"])]
+    data.to_csv("results.csv")
 
     eval_table = []
 
-    for flakefighter in flakefighters + ["Overall"]:
+    data = data.query("failures > 0")
+
+    for flakefighter in list(flakefighters) + ["Combined"]:
         true_positives = (data["confirmed"] & (data[flakefighter].astype("boolean"))).sum()
         false_positives = (~data["confirmed"] & (data[flakefighter].astype("boolean"))).sum()
         true_negatives = ((~data["confirmed"]) & (~data[flakefighter].astype("boolean"))).sum()
+        false_negatives = (data["confirmed"] & (~data[flakefighter].astype("boolean"))).sum()
 
-        sensitivity = true_positives / (true_positives + false_positives)
-        specificity = true_negatives / (true_negatives + false_positives)
-        bcr = (sensitivity + specificity) / 2
         eval_table.append(
             {
-                "Flakefighter": flakefighter,
-                "TP": true_positives,
-                "FP": false_positives,
-                "TN": true_negatives,
-                "Sensitivity": sensitivity,
-                "Specificity": specificity,
-                "BCR": bcr,
+                "Flakefighter": flakefighters.get(flakefighter, "Combined"),
+                "True Positives": true_positives,
+                "False Positives": false_positives,
+                "True Negatives": true_negatives,
+                "False Negatives": false_negatives,
             }
         )
 
     eval_table = pd.DataFrame(eval_table).round(3)
     print(eval_table)
-    eval_table.to_latex("results.tex", index=False)
+    eval_table.sort_values(["True Positives", "False Positives"], ascending=False).to_latex(
+        "results.tex", index=False, float_format="{:.3f}".format
+    )
 
     print()
     print(len(set(data["test_id"])), "tests in total")
