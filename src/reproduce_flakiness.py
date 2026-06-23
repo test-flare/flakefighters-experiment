@@ -9,6 +9,7 @@ import re
 import subprocess
 import sys
 from glob import glob
+import time
 
 from git import Repo
 
@@ -143,9 +144,12 @@ class FlakinessReproducer:
         confirmed = False
 
         test_to_run = self.test_path.split("::")[0]
+        flakefighters_runtime = None
+        no_flakefighters_runtime = None
 
-        for _ in range(self.repeats):
+        for i in range(self.repeats):
 
+            flakefighters_start = time.time()
             process = subprocess.run(
                 f"pytest {test_to_run} --database-url={self.db_url} --flakefighters",
                 shell=True,
@@ -153,6 +157,19 @@ class FlakinessReproducer:
                 capture_output=True,
                 check=False,
             )
+            flakefighters_end = time.time()
+            if not i:
+                flakefighters_runtime = flakefighters_end - flakefighters_start
+                no_flakefighters_start = time.time()
+                process = subprocess.run(
+                    f"pytest {test_to_run}",
+                    shell=True,
+                    cwd=self.repo_path,
+                    capture_output=True,
+                    check=False,
+                )
+                no_flakefighters_end = time.time()
+                no_flakefighters_runtime = no_flakefighters_end - no_flakefighters_start
 
             if self.test_path not in parse_test_failures(process.stdout.decode("utf-8")):
                 successes += 1
@@ -161,16 +178,16 @@ class FlakinessReproducer:
             else:
                 failures += 1
             if successes and failures:
-                print("CONFIRMED!!!!!")
                 confirmed = True
                 break
 
-        # assert setup_result or os.path.exists(db_url), f"No database at {db_url}"
         print("CONFIRMED", confirmed)
         return {
             "successes": successes,
             "failures": failures,
             "confirmed": confirmed,
+            "flakefighters_runtime": flakefighters_runtime,
+            "no_flakefighters_runtime": no_flakefighters_runtime,
             "stdout": process.stdout.decode("utf-8"),
             "stderr": process.stderr.decode("utf-8"),
         }
